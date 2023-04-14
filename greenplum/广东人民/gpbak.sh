@@ -1,5 +1,5 @@
-
 #!/bin/bash
+
 source /usr/local/greenplum-db/greenplum_path.sh
 export MASTER_DATA_DIRECTORY=/data/gpseg-1
 export GPPORT=5432
