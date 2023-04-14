@@ -18,7 +18,7 @@ function DbBackup()
 
 function RmOldBak()
 {
-	weekago=$(date -d "1 week ago" +%s)
+	weekago=$(date -d "7 days ago" +%s)
 	for oldbak in $(ls -l $BAKDIR|egrep "^d"|awk '{print $9}')
 	do
 		oldbakdate=$(date -d $oldbak +%s)
