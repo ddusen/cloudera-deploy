@@ -1,0 +1,1 @@
+psql gdsrm  -f get_tablesize_rank.sql  --output=get_tablesize_rank.out
