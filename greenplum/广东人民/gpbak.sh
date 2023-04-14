@@ -23,7 +23,7 @@ function RmOldBak()
 	do
 		oldbakdate=$(date -d $oldbak +%s)
 		echo "$oldbakdate $weekago"
-		if [[ $monthago -ge $oldbakdate ]];then
+		if [[ $weekago -ge $oldbakdate ]];then
 			echo "delete old bak: $oldbak"
 			gpssh -f /home/gpadmin/conf/hosts -e "rm -rf $BAKDIR/$oldbak"
 		fi
