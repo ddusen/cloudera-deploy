@@ -29,6 +29,8 @@ function install_jdk() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>05_java.sh$CEND"
 
     echo -e "$CSTART>>download_jdk$CEND"

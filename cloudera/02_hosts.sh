@@ -20,6 +20,8 @@ function config_hostname() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>02_hosts.sh$CEND"
     echo -e "$CSTART>>config_hosts$CEND"
     config_hosts

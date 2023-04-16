@@ -44,6 +44,8 @@ function restart_ntp() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>06_ntp.sh$CEND"
 
     echo -e "$CSTART>>remove_old_ntp$CEND"

@@ -14,6 +14,8 @@ function reboot() {
 }
 
 function main() {
+	source 00_env.sh
+	
     reboot
 }
 

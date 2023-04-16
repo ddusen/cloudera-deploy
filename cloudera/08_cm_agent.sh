@@ -35,6 +35,8 @@ function restart_agent() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>08_cm_agent.sh$CEND"
 
     echo -e "$CSTART>>>>install_agent$CEND"

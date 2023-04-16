@@ -34,6 +34,8 @@ function restart_server() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>09_cm_server.sh$CEND"
 
     echo -e "$CSTART>>>>install_server$CEND"

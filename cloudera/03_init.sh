@@ -71,6 +71,8 @@ function config_network(){
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>03_init.sh$CEND"
 
     echo -e "$CSTART>>install_base$CEND"

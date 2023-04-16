@@ -47,6 +47,8 @@ function install_mysql_connector() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>07_mysql.sh$CEND"
 
     echo -e "$CSTART>>download_mysql$CEND"

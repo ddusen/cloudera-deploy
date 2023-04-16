@@ -37,6 +37,8 @@ function start_httpd() {
 }
 
 function main() {
+	source 00_env.sh
+	
     echo -e "$CSTART>04_httpd.sh$CEND"
     echo -e "$CSTART>>download_files$CEND"
     download_files
