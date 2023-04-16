@@ -72,7 +72,7 @@ echo "echo never > /sys/kernel/mm/transparent_huagepage/enabled" >> /etc/rc.d/rc
 
 
 function Sys7DisableThp(){
-        grubby --update-kernel=ALL --args="transparent_hugepage=never";
+    grubby --update-kernel=ALL --args="transparent_hugepage=never";
 	sed -i "/^#RemoveIPC=no/cRemoveIPC=no" /etc/systemd/logind.conf;
 	systemctl restart systemd-logind.service;
 }
@@ -98,8 +98,7 @@ function OffService(){
 
 function DisableService(){
 	systemctl disable postfix;
-	#systemctl disable NetworkManager;
-        systemctl disable libvirtd;
+    systemctl disable libvirtd;
 	systemctl disable firewalld;
 }
 
