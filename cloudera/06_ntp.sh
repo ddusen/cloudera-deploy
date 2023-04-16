@@ -65,3 +65,5 @@ function main() {
     echo -e "\t restart_ntp"
     restart_ntp
 }
+
+main

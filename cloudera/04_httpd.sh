@@ -49,3 +49,5 @@ function main() {
     echo -e "\t start_httpd"
     start_httpd
 }
+
+main

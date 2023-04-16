@@ -38,3 +38,7 @@
 - 需要修改脚本中的 `HTTPD_SERVER` 变量
 - [./cm/07_mysql.sh](./cm/07_mysql.sh)
 
+### 8. 安装 cloudera manager agent
+- 需要修改脚本中的 `HTTPD_SERVER` 变量
+- [./cm/08_cm_agent.sh](./cm/08_cm_agent.sh)
+

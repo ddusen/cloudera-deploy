@@ -37,3 +37,5 @@ function main() {
     echo -e "\t install_jdk"
     install_jdk
 }
+
+main

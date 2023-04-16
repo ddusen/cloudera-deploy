@@ -70,3 +70,5 @@ function main() {
     install_mysql_connector
 
 }
+
+main
