@@ -27,7 +27,10 @@
 - [./cm/04_httpd.sh](./cm/04_httpd.sh)
 
 ### 5. 安装 java
-- 注意修改脚本中的 `HTTPD_SERVER` 变量
+- 需要修改脚本中的 `HTTPD_SERVER` 变量
 - [./cm/05_java.sh](./cm/05_java.sh)
 
+### 6. 安装 ntp
+- 需要修改 `config/ntp_clients` 中的 ntp server ip `10.0.5.224`
+- [./cm/06_ntp.sh](./cm/06_ntp.sh)
 
