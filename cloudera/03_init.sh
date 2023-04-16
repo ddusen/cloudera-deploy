@@ -43,7 +43,7 @@ function disable_hugepage(){
 # 关闭 selinux
 function disable_selinux(){
 	echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr \"sed -i '/^SELINUX=/cSELINUX=disabled\" /etc/selinux/config;\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "sed -i '/^SELINUX=/cSELINUX=disabled" /etc/selinux/config;"; done
+    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "sed -i '/^SELINUX=/cSELINUX=disabled' /etc/selinux/config;"; done
 }
 
 # 配置ssh
