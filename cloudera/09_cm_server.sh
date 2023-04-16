@@ -34,15 +34,15 @@ function restart_server() {
 }
 
 function main() {
-    echo "09_cm_server.sh"
+    echo -e "$CSTART>09_cm_server.sh$CEND"
 
-    echo -e '$CSTART>>>>install_server'
+    echo -e "$CSTART>>>>install_server$CEND"
     install_server
 
-    echo -e '$CSTART>>>>config_server'
+    echo -e "$CSTART>>>>config_server$CEND"
     config_server
 
-    echo -e '$CSTART>>>>restart_server'
+    echo -e "$CSTART>>>>restart_server$CEND"
     restart_server
 }
 

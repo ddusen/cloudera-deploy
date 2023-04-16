@@ -9,85 +9,86 @@ set -e
 
 # 安装一些基础软件，便于后续操作
 function install_base() {
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i "yum install -y wget net-tools epel-release htop"; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i "yum install -y wget net-tools epel-release htop"; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i "yum install -y wget net-tools epel-release htop"; done
 }
 
 # 备份一些配置文件
 function backup_configs(){
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `mkdir -p /opt/backup_sys_configs;`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `mkdir -p /opt/backup_sys_configs;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `mkdir -p /opt/backup_sys_configs;`; done
 
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `cp /etc/security/limits.conf /opt/backup_sys_configs;`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `cp /etc/security/limits.conf /opt/backup_sys_configs;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `cp /etc/security/limits.conf /opt/backup_sys_configs;`; done
 
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `cp /etc/security/limits.d/20-nproc.conf /opt/backup_sys_configs;`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `cp /etc/security/limits.d/20-nproc.conf /opt/backup_sys_configs;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `cp /etc/security/limits.d/20-nproc.conf /opt/backup_sys_configs;`; done
 
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `cp /etc/sysctl.conf /opt/backup_sys_configs;`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `cp /etc/sysctl.conf /opt/backup_sys_configs;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `cp /etc/sysctl.conf /opt/backup_sys_configs;`; done
 
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `cp /etc/ssh/sshd_config /opt/backup_sys_configs`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `cp /etc/ssh/sshd_config /opt/backup_sys_configs`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `cp /etc/ssh/sshd_config /opt/backup_sys_configs`; done
 }
 
 # 禁用 hugepage
 function disable_hugepage(){
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `grubby --update-kernel=ALL --args="transparent_hugepage=never"`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `grubby --update-kernel=ALL --args="transparent_hugepage=never"`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `grubby --update-kernel=ALL --args="transparent_hugepage=never"`; done
 
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `sed -i "/^#RemoveIPC=no/cRemoveIPC=no" /etc/systemd/logind.conf; systemctl restart systemd-logind.service`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `sed -i "/^#RemoveIPC=no/cRemoveIPC=no" /etc/systemd/logind.conf; systemctl restart systemd-logind.service`; done$CEND"
 	for i in `cat config/all_nodes`; do ssh $i `sed -i "/^#RemoveIPC=no/cRemoveIPC=no" /etc/systemd/logind.conf; systemctl restart systemd-logind.service`; done
 }
 
 # 关闭 selinux
 function disable_selinux(){
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `sed -i "/^SELINUX=/cSELINUX=disabled" /etc/selinux/config;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `sed -i "/^SELINUX=/cSELINUX=disabled" /etc/selinux/config;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `sed -i "/^SELINUX=/cSELINUX=disabled" /etc/selinux/config;`; done
 }
 
 # 配置ssh
 function config_ssh(){
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `sed -i "/^#UseDNS/cUseDNS no" /etc/ssh/sshd_config;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `sed -i "/^#UseDNS/cUseDNS no" /etc/ssh/sshd_config;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `sed -i "/^#UseDNS/cUseDNS no" /etc/ssh/sshd_config;`; done
 
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `sed -i "/^GSSAPIAuthentication/cGSSAPIAuthentication no" /etc/ssh/sshd_config;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `sed -i "/^GSSAPIAuthentication/cGSSAPIAuthentication no" /etc/ssh/sshd_config;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `sed -i "/^GSSAPIAuthentication/cGSSAPIAuthentication no" /etc/ssh/sshd_config;`; done
 
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `sed -i "/^GSSAPICleanupCredentials/cGSSAPICleanupCredentials no" /etc/ssh/sshd_config;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `sed -i "/^GSSAPICleanupCredentials/cGSSAPICleanupCredentials no" /etc/ssh/sshd_config;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `sed -i "/^GSSAPICleanupCredentials/cGSSAPICleanupCredentials no" /etc/ssh/sshd_config;`; done
 
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `sed -i "/^#MaxStartups/cMaxStartups 10000:30:20000" /etc/ssh/sshd_config;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `sed -i "/^#MaxStartups/cMaxStartups 10000:30:20000" /etc/ssh/sshd_config;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `sed -i "/^#MaxStartups/cMaxStartups 10000:30:20000" /etc/ssh/sshd_config;`; done
 }
 
 # 配置网络策略
 function config_network(){
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off;`; done
 
-	echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld;`; done'
+	echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld;`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld;`; done
 }
 
 function main() {
-    echo '03_init.sh'
-    echo -e '$CSTAET>>install_base'
+    echo -e "$CSTAET>03_init.sh$CEND"
+    
+    echo -e "$CSTAET>>install_base$CEND"
     install_base
 
-    echo -e '$CSTAET>>backup_configs'
+    echo -e "$CSTAET>>backup_configs$CEND"
     backup_configs
 
-    echo -e '$CSTAET>>disable_hugepage'
+    echo -e "$CSTAET>>disable_hugepage$CEND"
     disable_hugepage
 
-    echo -e '$CSTAET>>disable_selinux'
+    echo -e "$CSTAET>>disable_selinux$CEND"
     disable_selinux
 
-    echo -e '$CSTAET>>config_ssh'
+    echo -e "$CSTAET>>config_ssh$CEND"
     config_ssh
 
-    echo -e '$CSTAET>>config_network'
+    echo -e "$CSTAET>>config_network$CEND"
     config_network
 }
 

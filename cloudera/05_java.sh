@@ -9,7 +9,7 @@ set -e
 
 # 从httpd私有软件库，下载 jdk
 function download_jdk() {
-    echo -e "\t\t wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz"
+    echo -e "$CSTART>>>>wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz$CEND"
     wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz
 }
 
@@ -28,11 +28,11 @@ function install_jdk() {
 }
 
 function main() {
-    echo "05_java.sh"
-    echo -e "\t download_jdk"
+    echo -e "$CSTART>05_java.sh$CEND"
+    echo -e "$CSTART>>download_jdk$CEND"
     download_jdk
 
-    echo -e "\t install_jdk"
+    echo -e "$CSTART>>install_jdk$CEND"
     install_jdk
 }
 

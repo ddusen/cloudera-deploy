@@ -6,7 +6,7 @@
 
 # 以下为安装 Cloudera 所需的环境变量
 ## 控制日志颜色：灰色
-export CSTART="\033[37m"
+export CSTART="\033[36m"
 export CEND="\033[0m"
 
 ## 文件名称

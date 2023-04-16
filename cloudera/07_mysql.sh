@@ -9,25 +9,25 @@ set -e
 
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
-    echo -e "\t\t wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz"
+    echo -e "$CSTART>>>>wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz$CEND"
     wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz
 }
 
 # 安装 mysql5.6
 function install_mysql() {
-    echo -e '$CSTART>>>>mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm'
+    echo -e "$CSTART>>>>mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm$CEND"
     mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm
 }
 
 # 配置 mysql5.6
 function config_mysql() {
-    echo -e '$CSTART>>>>cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf'
+    echo -e "$CSTART>>>>cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf$CEND"
     cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf
 }
 
 # 重启 mysql
 function restart_mysql() {
-    echo -e '$CSTART>>>>systemctl start mysql; systemctl enable mysql'
+    echo -e "$CSTART>>>>systemctl start mysql; systemctl enable mysql$CEND"
     systemctl start mysql; systemctl enable mysql;
 }
 
@@ -46,24 +46,24 @@ function install_mysql_connector() {
 }
 
 function main() {
-    echo "07_mysql.sh"
+    echo -e "$CSTART>07_mysql.sh$CEND"
 
-    echo -e "\t download_mysql"
+    echo -e "$CSTART>>download_mysql$CEND"
     download_mysql
 
-    echo -e "\t install_mysql"
+    echo -e "$CSTART>>install_mysql$CEND"
     install_mysql
 
-    echo -e "\t config_mysql"
+    echo -e "$CSTART>>config_mysql$CEND"
     config_mysql
 
-    echo -e "\t restart_mysql"
+    echo -e "$CSTART>>restart_mysql$CEND"
     restart_mysql
 
-    echo -e "\t update_database"
+    echo -e "$CSTART>>update_database$CEND"
     update_database
 
-    echo -e "\t install_mysql_connector"
+    echo -e "$CSTART>>install_mysql_connector$CEND"
     install_mysql_connector
 
 }

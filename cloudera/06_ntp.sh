@@ -9,59 +9,59 @@ set -e
 
 # 移除旧版本 ntp
 function remove_old_ntp() {
-    echo -e '$CSTART>>>>yum remove -y chrony ntp'
+    echo -e "$CSTART>>>>yum remove -y chrony ntp$CEND"
     yum remove -y chrony ntp
 }
 
 # 安装 ntp
 function install_ntp() {
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `yum install -y ntp`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `yum install -y ntp`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `yum install -y ntp`; done
 }
 
 # 备份 ntp config
 function backup_ntp_config() {
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done
 }
 
 # 配置 ntp server
 function config_ntp_server() {
-    echo -e '$CSTART>>>>cp config/ntp_server /etc/ntp.conf'
+    echo -e "$CSTART>>>>cp config/ntp_server /etc/ntp.conf$CEND"
     cp config/ntp_server /etc/ntp.conf
 }
 
 # 配置 ntp clients
 function config_ntp_clients() {
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do scp config/ntp_clients $i:/etc/ntp.conf; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do scp config/ntp_clients \$i:/etc/ntp.conf; done$CEND"
     for i in `cat config/all_nodes`; do scp config/ntp_clients $i:/etc/ntp.conf; done
 }
 
 # 重启 ntp 服务
 function restart_ntp() {
-    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done'
+    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done$CEND"
     for i in `cat config/all_nodes`; do ssh $i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done
 }
 
 function main() {
-    echo "06_ntp.sh"
+    echo -e "$CSTART>06_ntp.sh$CEND"
 
-    echo -e "\t remove_old_ntp"
+    echo -e "$CSTART>>remove_old_ntp$CEND"
     remove_old_ntp
 
-    echo -e "\t install_ntp"
+    echo -e "$CSTART>>install_ntp$CEND"
     install_ntp
 
-    echo -e "\t backup_ntp_config"
+    echo -e "$CSTART>>backup_ntp_config$CEND"
     backup_ntp_config
 
-    echo -e "\t config_ntp_server"
+    echo -e "$CSTART>>config_ntp_server$CEND"
     config_ntp_server
 
-    echo -e "\t config_ntp_clients"
+    echo -e "$CSTART>>config_ntp_clients$CEND"
     config_ntp_clients
 
-    echo -e "\t restart_ntp"
+    echo -e "$CSTART>>restart_ntp$CEND"
     restart_ntp
 }
 

@@ -17,36 +17,36 @@ function download_files() {
 # 解压到指定目录
 function unzip_files() {
     dist_dir="/var/www/html/cloudera"
-    echo -e "\t\t mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir"
+    echo -e "$CSTART>>>>mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir$CEND"
     mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir
 }
 
 # 安装 httpd：用作私有化 cm、cdh 的软件仓库
 function install_httpd() {
-    echo -e "\t\t yum install -y httpd"
+    echo -e "$CSTART>>>>yum install -y httpd$CEND"
     yum install -y httpd
 }
 
 # 启动 httpd
 function start_httpd() {
-    echo -e "\t\t systemctl stop firewalld; systemctl enable httpd; systemctl start httpd"
+    echo -e "$CSTART>>>>systemctl stop firewalld; systemctl enable httpd; systemctl start httpd$CEND"
     systemctl stop firewalld
     systemctl enable httpd
     systemctl start httpd
 }
 
 function main() {
-    echo "04_httpd.sh"
-    echo -e "\t download_files"
+    echo -e "$CSTART>04_httpd.sh$CEND"
+    echo -e "$CSTART>>download_files$CEND"
     download_files
 
-    echo -e "\t unzip_files"
+    echo -e "$CSTART>>unzip_files$CEND"
     unzip_files
 
-    echo -e "\t install_httpd"
+    echo -e "$CSTART>>install_httpd$CEND"
     install_httpd
 
-    echo -e "\t start_httpd"
+    echo -e "$CSTART>>start_httpd$CEND"
     start_httpd
 }
 
