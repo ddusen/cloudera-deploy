@@ -9,8 +9,8 @@ set -e
 
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
-    echo -e "$CSTART>>>>wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz$CEND"
-    wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz
+    echo -e "$CSTART>>>>wget -O /tmp/mysql5.6.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz$CEND"
+    wget -O /tmp/mysql5.6.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz
 }
 
 # 安装 mysql5.6
@@ -41,7 +41,7 @@ function update_database() {
 # 安装mysql插件：mysql-connector-java
 function install_mysql_connector() {
     mkdir -p /usr/share/java
-    wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql-connector-java-5.1.46.jar.tar.gz
+    wget -O /tmp/mysql-connector-java-5.1.46.jar.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql-connector-java-5.1.46.jar.tar.gz
     tar -zxvf /tmp/mysql-connector-java-5.1.46.jar.tar.gz -C /usr/share/java/
 }
 

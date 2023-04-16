@@ -9,8 +9,8 @@ set -e
 
 # 从httpd私有软件库，下载 jdk
 function download_jdk() {
-    echo -e "$CSTART>>>>wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz$CEND"
-    wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz
+    echo -e "$CSTART>>>>wget -O /tmp/jdk-8u202-linux-x64.tar.gz http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz$CEND"
+    wget -O /tmp/jdk-8u202-linux-x64.tar.gz http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz
 }
 
 # 安装 jdk 到所有节点
