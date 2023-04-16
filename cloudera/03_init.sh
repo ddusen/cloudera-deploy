@@ -71,24 +71,24 @@ function config_network(){
 }
 
 function main() {
-    echo -e "$CSTAET>03_init.sh$CEND"
+    echo -e "$CSTART>03_init.sh$CEND"
 
-    echo -e "$CSTAET>>install_base$CEND"
+    echo -e "$CSTART>>install_base$CEND"
     install_base
 
-    echo -e "$CSTAET>>backup_configs$CEND"
+    echo -e "$CSTART>>backup_configs$CEND"
     backup_configs
 
-    echo -e "$CSTAET>>disable_hugepage$CEND"
+    echo -e "$CSTART>>disable_hugepage$CEND"
     disable_hugepage
 
-    echo -e "$CSTAET>>disable_selinux$CEND"
+    echo -e "$CSTART>>disable_selinux$CEND"
     disable_selinux
 
-    echo -e "$CSTAET>>config_ssh$CEND"
+    echo -e "$CSTART>>config_ssh$CEND"
     config_ssh
 
-    echo -e "$CSTAET>>config_network$CEND"
+    echo -e "$CSTART>>config_network$CEND"
     config_network
 }
 

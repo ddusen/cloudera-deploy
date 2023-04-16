@@ -24,7 +24,7 @@ function main() {
     echo -e "$CSTART>>config_hosts$CEND"
     config_hosts
 
-    echo -e "$CSTAET>>config_hostname$CEND"
+    echo -e "$CSTART>>config_hostname$CEND"
     config_hostname
 }
 

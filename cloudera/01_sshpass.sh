@@ -21,10 +21,10 @@ function config_sshpass() {
 
 function main() {
     echo -e "$CSTART>01_sshpass.sh$CEND"
-    echo -e "$CSTAET>>install_sshpass$CEND"
+    echo -e "$CSTART>>install_sshpass$CEND"
     install_sshpass
 
-    echo -e "$CSTAET>>config_sshpass$CEND"
+    echo -e "$CSTART>>config_sshpass$CEND"
     config_sshpass
 }
 
