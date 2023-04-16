@@ -11,7 +11,7 @@ set -e
 function install_server() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh -n $ipaddr "rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm";
+        ssh -n $ipaddr "rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true";
     done
 }
 
