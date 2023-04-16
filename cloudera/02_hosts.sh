@@ -15,8 +15,8 @@ function config_hosts() {
 
 # 配置所有节点的 hostname
 function config_hostname() {
-    echo -e '\t\t cat config/hostnames | while read ipaddr hostname; do ssh $ipaddr `echo "hostname=$hostname"`; done'
-    cat config/hostnames | while read ipaddr hostname; do ssh $ipaddr `echo "hostname=$hostname"`; done
+    echo -e '\t\t cat config/hostnames | while read ipaddr hostname; do ssh $ipaddr `echo "hostname=$hostname" >> /etc/sysconfig/network`; done'
+    cat config/hostnames | while read ipaddr hostname; do ssh $ipaddr `echo "hostname=$hostname" >> /etc/sysconfig/network`; done
 }
 
 function main() {
