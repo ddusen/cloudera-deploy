@@ -40,5 +40,11 @@
 
 ### 8. 安装 cloudera manager agent
 - 需要修改脚本中的 `HTTPD_SERVER` 变量
+- 需要 `config/cm_agent` 中的 `server_host` 变量
 - [./cm/08_cm_agent.sh](./cm/08_cm_agent.sh)
+
+### 9. 安装 cloudera manager server
+- 需要修改脚本中的 `HTTPD_SERVER` 变量
+- 需要 `config/cm_server` 中的 `*.host` 变量
+- [./cm/09_cm_server.sh](./cm/09_cm_server.sh)
 

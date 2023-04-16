@@ -23,7 +23,7 @@ function config_agent() {
     for i in `cat config/all_nodes`
     do 
         ssh $i "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak"
-        scp config/agent.ini $i:/etc/cloudera-scm-agent/config.ini
+        scp config/cm_agent $i:/etc/cloudera-scm-agent/config.ini
         ssh $i "chmod 644 /etc/cloudera-scm-agent/config.ini"
     done
 }
