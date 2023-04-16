@@ -34,3 +34,7 @@
 - 需要修改 `config/ntp_clients` 中的 ntp server ip `10.0.5.224`
 - [./cm/06_ntp.sh](./cm/06_ntp.sh)
 
+### 7. 安装 mysql
+- 需要修改脚本中的 `HTTPD_SERVER` 变量
+- [./cm/07_mysql.sh](./cm/07_mysql.sh)
+
