@@ -9,8 +9,8 @@ set -e
 
 # 移除旧版本 ntp
 function remove_old_ntp() {
-    echo -e "$CSTART>>>>yum remove -y chrony ntp$CEND"
-    yum remove -y chrony ntp
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "yum remove -y chrony ntp"; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "yum remove -y chrony ntp"; done
 }
 
 # 安装 ntp
