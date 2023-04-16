@@ -7,6 +7,14 @@
 
 set -e 
 
+# 安装 cloudera manager agent 依赖
+function install_dependent() {
+    cat config/vm_info | while read ipaddr name passwd
+    do 
+        ssh -n $ipaddr "yum install -y bind-utils psmisc cyrus-sasl-plain cyrus-sasl-gssapi fuse portmap fuse-libs /lib/lsb/init-functions httpd mod_ssl openssl-devel python-psycopg2 MySQL-python libxslt || true";
+    done
+}
+
 # 安装 cloudera manager agent
 function install_agent() {
     cat config/vm_info | while read ipaddr name passwd
@@ -38,6 +46,9 @@ function main() {
 	source 00_env.sh
 	
     echo -e "$CSTART>08_cm_agent.sh$CEND"
+
+    echo -e "$CSTART>>>>install_dependent$CEND"
+    install_dependent
 
     echo -e "$CSTART>>>>install_agent$CEND"
     install_agent
