@@ -11,8 +11,8 @@ set -e
 function install_agent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh $ipaddr "yum install -y http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm"
-        ssh $ipaddr "yum install -y http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm"
+        ssh -n $ipaddr "yum install -y http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm"
+        ssh -n $ipaddr "yum install -y http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm"
     done
 }
 
@@ -20,9 +20,9 @@ function install_agent() {
 function config_agent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh $ipaddr "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak"
+        ssh -n $ipaddr "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak"
         scp config/cm_agent $ipaddr:/etc/cloudera-scm-agent/config.ini
-        ssh $ipaddr "chmod 644 /etc/cloudera-scm-agent/config.ini"
+        ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-agent/config.ini"
     done
 }
 
@@ -30,7 +30,7 @@ function config_agent() {
 function restart_agent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh $ipaddr "systemctl restart cloudera-scm-agent; systemctl enable cloudera-scm-agent"
+        ssh -n $ipaddr "systemctl restart cloudera-scm-agent; systemctl enable cloudera-scm-agent"
     done
 }
 

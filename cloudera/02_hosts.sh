@@ -15,8 +15,8 @@ function config_hosts() {
 
 # 配置所有节点的 hostname
 function config_hostname() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr \"echo \"hostname=\$hostname\" >> /etc/sysconfig/network\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "echo 'hostname=$name' > /etc/sysconfig/network"; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"echo \"hostname=\$hostname\" >> /etc/sysconfig/network\"; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "echo 'hostname=$name' > /etc/sysconfig/network"; done
 }
 
 function main() {

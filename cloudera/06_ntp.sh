@@ -15,14 +15,14 @@ function remove_old_ntp() {
 
 # 安装 ntp
 function install_ntp() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr \"yum install -y ntp\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "yum install -y ntp"; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"yum install -y ntp\"; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "yum install -y ntp"; done
 }
 
 # 备份 ntp config
 function backup_ntp_config() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr \"cp /etc/ntp.conf /etc/ntp.conf.bak\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak"; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"cp /etc/ntp.conf /etc/ntp.conf.bak\"; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak"; done
 }
 
 # 配置 ntp server
@@ -39,8 +39,8 @@ function config_ntp_clients() {
 
 # 重启 ntp 服务
 function restart_ntp() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr \"systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true"; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true\"; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true"; done
 }
 
 function main() {

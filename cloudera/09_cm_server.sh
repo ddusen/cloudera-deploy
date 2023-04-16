@@ -11,7 +11,7 @@ set -e
 function install_server() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh $ipaddr "yum install -y http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm"
+        ssh -n $ipaddr "yum install -y http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm"
     done
 }
 
@@ -19,9 +19,9 @@ function install_server() {
 function config_server() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh $ipaddr "cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak"
+        ssh -n $ipaddr "cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak"
         scp config/cm_server $ipaddr:/etc/cloudera-scm-server/db.properties
-        ssh $ipaddr "chmod 644 /etc/cloudera-scm-server/config.ini"
+        ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-server/config.ini"
     done
 }
 
@@ -29,7 +29,7 @@ function config_server() {
 function restart_server() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        ssh $ipaddr "systemctl restart cloudera-scm-server; systemctl enable cloudera-scm-server"
+        ssh -n $ipaddr "systemctl restart cloudera-scm-server; systemctl enable cloudera-scm-server"
     done
 }
 

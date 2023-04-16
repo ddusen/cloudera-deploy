@@ -15,16 +15,16 @@ function download_jdk() {
 
 # 安装 jdk 到所有节点
 function install_jdk() {
-    tar -xf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/
+    tar -zxvf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/
 
     cat config/vm_info | while read ipaddr name passwd
     do
         scp -r /opt/jdk1.8.0_202  $ipaddr:/opt
         scp -r config/jdk_profile  $ipaddr:/tmp/
-        ssh $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile"
-        ssh $ipaddr "cat /tmp/jdk_profile >> /etc/profile"
-        ssh $ipaddr "source /etc/profile"
-        ssh $ipaddr "mkdir /usr/java; ln -s /opt/jdk1.8.0_202 /usr/java/default"
+        ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile"
+        ssh -n $ipaddr "cat /tmp/jdk_profile >> /etc/profile"
+        ssh -n $ipaddr "source /etc/profile"
+        ssh -n $ipaddr "mkdir /usr/java; ln -s /opt/jdk1.8.0_202 /usr/java/default"
     done
 }
 
