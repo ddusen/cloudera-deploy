@@ -9,20 +9,20 @@ set -e
 
 # 移除旧版本 ntp
 function remove_old_ntp() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "yum remove -y chrony ntp"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "yum remove -y chrony ntp"; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr "yum remove -y chrony ntp"; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do echo $ipaddr; ssh -n $ipaddr "yum remove -y chrony ntp"; done
 }
 
 # 安装 ntp
 function install_ntp() {
     echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"yum install -y ntp\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "yum install -y ntp"; done
+    cat config/vm_info | while read ipaddr name passwd; do echo $ipaddr; ssh -n $ipaddr "yum install -y ntp"; done
 }
 
 # 备份 ntp config
 function backup_ntp_config() {
     echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"cp /etc/ntp.conf /etc/ntp.conf.bak\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak"; done
+    cat config/vm_info | while read ipaddr name passwd; do echo $ipaddr; ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak"; done
 }
 
 # 配置 ntp server
@@ -40,7 +40,7 @@ function config_ntp_clients() {
 # 重启 ntp 服务
 function restart_ntp() {
     echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh -n \$ipaddr \"systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true\"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true"; done
+    cat config/vm_info | while read ipaddr name passwd; do echo $ipaddr; ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true"; done
 }
 
 function main() {
