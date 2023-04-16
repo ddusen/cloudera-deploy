@@ -10,7 +10,7 @@ set -e
 # 配置所有节点的 hosts
 function config_hosts() {
     echo -e '\t\t for i in `cat all_nodes`; do scp config/hosts $i:/etc/ done'
-    for i in `cat all_nodes`; do scp config/hosts $i:/etc/ done
+    for i in `cat all_nodes`; do scp config/hosts $i:/etc/ ; done
 }
 
 function main() {
