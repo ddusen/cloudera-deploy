@@ -48,3 +48,4 @@
 - 需要 `config/cm_server` 中的 `*.host` 变量
 - [./cm/09_cm_server.sh](./cm/09_cm_server.sh)
 
+## 二、CDH 安装
