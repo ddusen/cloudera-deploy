@@ -7,11 +7,13 @@
 
 set -e 
 
-FILENAME="cloudera.6.3.tar.gz"
+FILENAME="cloudera.6.3.1466458.tar.gz"
 
 # 下载 cm、cdh 相关的软件
 function download_files() {
-    # wget
+    # wget -P /opt http://xxx/cloudera.6.3.1466458.tar.gz 
+    # 把 cloudera.6.3.1466458.tar.gz 复制到中控机的 /opt 目录
+    scp ~/Downloads/$FILENAME root@10.0.5.224:/opt/
 }
 
 # 解压到指定目录
