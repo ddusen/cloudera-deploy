@@ -35,7 +35,7 @@ function restart_mysql() {
 function update_database() {
     default_passwd=$(cat /root/.mysql_secret |grep password|awk '{print $18}')
     mysql -uroot -p"${default_passwd}" --connect-expired-password -e "SET PASSWORD = PASSWORD('$MYSQL_ROOT_PASSWD');"
-    mysql -uroot -p"$MYSQL_ROOT_PASSWD" -e "SOURCE create_dbs.sql"
+    mysql -uroot -p"$MYSQL_ROOT_PASSWD" -e "SOURCE config/create_dbs.sql"
 }
 
 # 安装mysql插件：mysql-connector-java
