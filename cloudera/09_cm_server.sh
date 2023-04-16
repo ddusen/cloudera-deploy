@@ -21,7 +21,7 @@ function config_server() {
     do 
         ssh -n $ipaddr "cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak"
         scp config/cm_server $ipaddr:/etc/cloudera-scm-server/db.properties
-        ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-server/config.ini"
+        ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-server/db.properties"
     done
 }
 
