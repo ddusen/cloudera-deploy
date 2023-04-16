@@ -15,14 +15,14 @@ function remove_old_ntp() {
 
 # 安装 ntp
 function install_ntp() {
-    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `yum install -y ntp`; done$CEND"
-    for i in `cat config/all_nodes`; do ssh $i `yum install -y ntp`; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr `yum install -y ntp`; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr `yum install -y ntp`; done
 }
 
 # 备份 ntp config
 function backup_ntp_config() {
-    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done$CEND"
-    for i in `cat config/all_nodes`; do ssh $i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr `cp /etc/ntp.conf /etc/ntp.conf.bak`; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr `cp /etc/ntp.conf /etc/ntp.conf.bak`; done
 }
 
 # 配置 ntp server
@@ -33,14 +33,14 @@ function config_ntp_server() {
 
 # 配置 ntp clients
 function config_ntp_clients() {
-    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do scp config/ntp_clients \$i:/etc/ntp.conf; done$CEND"
-    for i in `cat config/all_nodes`; do scp config/ntp_clients $i:/etc/ntp.conf; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do scp config/ntp_clients \$ipaddr:/etc/ntp.conf; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do scp config/ntp_clients $ipaddr:/etc/ntp.conf; done
 }
 
 # 重启 ntp 服务
 function restart_ntp() {
-    echo -e "$CSTART>>>>for i in `cat config/all_nodes`; do ssh \$i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done$CEND"
-    for i in `cat config/all_nodes`; do ssh $i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done
 }
 
 function main() {

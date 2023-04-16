@@ -17,13 +17,13 @@ function download_jdk() {
 function install_jdk() {
     tar -xf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/
 
-    for i in `cat config/all_nodes`
+    cat config/vm_info | while read ipaddr name passwd
     do
-        scp -r /opt/jdk1.8.0_202  $i:/opt
-        scp -r /config/jdk_profile  $i:/tmp/
-        ssh $i "cat /tmp/jdk_profile >> /etc/profile"
-        ssh $i "source /etc/profile"
-        ssh $i "mkdir /usr/java && ln -s /opt/jdk1.8.0_202 /usr/java/default"
+        scp -r /opt/jdk1.8.0_202  $ipaddr:/opt
+        scp -r /config/jdk_profile  $ipaddr:/tmp/
+        ssh $ipaddr "cat /tmp/jdk_profile >> /etc/profile"
+        ssh $ipaddr "source /etc/profile"
+        ssh $ipaddr "mkdir /usr/java && ln -s /opt/jdk1.8.0_202 /usr/java/default"
     done
 }
 

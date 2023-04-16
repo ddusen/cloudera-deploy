@@ -15,8 +15,8 @@ function install_sshpass() {
 
 # 配置免密
 function config_sshpass() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr passwd; do sshpass -p \$passwd ssh-copy-id -o StrictHostKeyChecking=no \$ipaddr; done$CEND"
-    cat config/vm_info | while read ipaddr passwd; do sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr; done
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do sshpass -p \$passwd ssh-copy-id -o StrictHostKeyChecking=no \$ipaddr; done$CEND"
+    cat config/vm_info | while read ipaddr name passwd; do sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr; done
 }
 
 function main() {
