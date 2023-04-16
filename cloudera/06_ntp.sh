@@ -57,11 +57,11 @@ function main() {
     echo -e "$CSTART>>backup_ntp_config$CEND"
     backup_ntp_config
 
-    echo -e "$CSTART>>config_ntp_server$CEND"
-    config_ntp_server
-
     echo -e "$CSTART>>config_ntp_clients$CEND"
     config_ntp_clients
+
+    echo -e "$CSTART>>config_ntp_server$CEND"
+    config_ntp_server
 
     echo -e "$CSTART>>restart_ntp$CEND"
     restart_ntp
