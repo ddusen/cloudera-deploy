@@ -26,3 +26,8 @@
 ### 4. 安装 httpd
 - [./cm/04_httpd.sh](./cm/04_httpd.sh)
 
+### 5. 安装 java
+- 注意修改脚本中的 `HTTPD_SERVER` 变量
+- [./cm/05_java.sh](./cm/05_java.sh)
+
+
