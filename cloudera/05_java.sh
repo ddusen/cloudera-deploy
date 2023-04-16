@@ -15,17 +15,18 @@ function download_jdk() {
     wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz
 }
 
-# 安装 jdk 到 cm 机器
+# 安装 jdk 到所有节点
 function install_jdk() {
     tar -xf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/
-    cat >> /etc/profile << EOF
-export JAVA_HOME=/opt/jdk1.8.0_202
-export PATH=\$JAVA_HOME/bin:\$PATH
-export CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
-EOF
-    source /etc/profile;
-    mkdir /usr/java;
-    ln -s /opt/jdk1.8.0_202 /usr/java/default
+
+    for i in `cat config/all_nodes`
+    do
+        scp -r /opt/jdk1.8.0_202  $i:/opt
+        scp -r /config/jdk_profile  $i:/tmp/
+        ssh $i "cat /tmp/jdk_profile >> /etc/profile"
+        ssh $i "source /etc/profile"
+        ssh $i "mkdir /usr/java && ln -s /opt/jdk1.8.0_202 /usr/java/default"
+    done
 }
 
 function main() {
