@@ -11,7 +11,7 @@ set -e
 function download_files() {
     # wget -P /opt http://xxx/cloudera.6.3.1466458.tar.gz 
     # 把 cloudera.6.3.1466458.tar.gz 复制到中控机的 /opt 目录
-    scp ~/Downloads/$FILENAME root@$CCC:/opt/
+    # scp ~/Downloads/$FILENAME root@$CCC:/opt/
 }
 
 # 解压到指定目录
