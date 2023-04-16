@@ -9,22 +9,22 @@ set -e
 
 # 配置所有节点的 hosts
 function config_hosts() {
-    echo -e `$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do scp config/hosts \$ipaddr:/etc/; done$CEND`
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do scp config/hosts \$ipaddr:/etc/; done$CEND"
     cat config/vm_info | while read ipaddr name passwd; do scp config/hosts $ipaddr:/etc/; done
 }
 
 # 配置所有节点的 hostname
 function config_hostname() {
-    echo -e `$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr `echo "hostname=\$hostname" >> /etc/sysconfig/network`; done$CEND`
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do ssh \$ipaddr \"echo \"hostname=\$hostname\" >> /etc/sysconfig/network\"; done$CEND"
     cat config/vm_info | while read ipaddr name passwd; do ssh $ipaddr "echo 'hostname=$name' > /etc/sysconfig/network"; done
 }
 
 function main() {
-    echo -e `$CSTART>02_hosts.sh$CEND`
-    echo -e `$CSTART>>config_hosts$CEND`
+    echo -e "$CSTART>02_hosts.sh$CEND"
+    echo -e "$CSTART>>config_hosts$CEND"
     config_hosts
 
-    echo -e `$CSTAET>>config_hostname$CEND`
+    echo -e "$CSTAET>>config_hostname$CEND"
     config_hostname
 }
 
