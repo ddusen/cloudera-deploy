@@ -37,13 +37,13 @@ function restart_agent() {
 function main() {
     echo "08_cm_agent.sh"
 
-    echo -e '\t\t install_agent'
+    echo -e '$CSTART>>>>install_agent'
     install_agent
 
-    echo -e '\t\t config_agent'
+    echo -e '$CSTART>>>>config_agent'
     config_agent
 
-    echo -e '\t\t restart_agent'
+    echo -e '$CSTART>>>>restart_agent'
     restart_agent
 }
 

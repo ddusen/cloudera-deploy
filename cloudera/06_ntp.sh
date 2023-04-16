@@ -9,37 +9,37 @@ set -e
 
 # 移除旧版本 ntp
 function remove_old_ntp() {
-    echo -e '\t\t yum remove -y chrony ntp'
+    echo -e '$CSTART>>>>yum remove -y chrony ntp'
     yum remove -y chrony ntp
 }
 
 # 安装 ntp
 function install_ntp() {
-    echo -e '\t\t for i in `cat config/all_nodes`; do ssh $i `yum install -y ntp`; done'
+    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `yum install -y ntp`; done'
     for i in `cat config/all_nodes`; do ssh $i `yum install -y ntp`; done
 }
 
 # 备份 ntp config
 function backup_ntp_config() {
-    echo -e '\t\t for i in `cat config/all_nodes`; do ssh $i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done'
+    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done'
     for i in `cat config/all_nodes`; do ssh $i `cp /etc/ntp.conf /etc/ntp.conf.bak`; done
 }
 
 # 配置 ntp server
 function config_ntp_server() {
-    echo -e '\t\t cp config/ntp_server /etc/ntp.conf'
+    echo -e '$CSTART>>>>cp config/ntp_server /etc/ntp.conf'
     cp config/ntp_server /etc/ntp.conf
 }
 
 # 配置 ntp clients
 function config_ntp_clients() {
-    echo -e '\t\t for i in `cat config/all_nodes`; do scp config/ntp_clients $i:/etc/ntp.conf; done'
+    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do scp config/ntp_clients $i:/etc/ntp.conf; done'
     for i in `cat config/all_nodes`; do scp config/ntp_clients $i:/etc/ntp.conf; done
 }
 
 # 重启 ntp 服务
 function restart_ntp() {
-    echo -e '\t\t for i in `cat config/all_nodes`; do ssh $i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done'
+    echo -e '$CSTART>>>>for i in `cat config/all_nodes`; do ssh $i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done'
     for i in `cat config/all_nodes`; do ssh $i `systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true`; done
 }
 

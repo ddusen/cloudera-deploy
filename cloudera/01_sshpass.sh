@@ -9,22 +9,22 @@ set -e
 
 # 安装sshpass
 function install_sshpass() {
-    echo -e '\t\t yum install -y sshpass'
+    echo -e "$CSTART>>>>yum install -y sshpass$CEND"
     yum install -y sshpass
 }
 
 # 配置免密
 function config_sshpass() {
-    echo -e '\t\t cat config/vm_info | while read ipaddr passwd; do sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr; done'
+    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr passwd; do sshpass -p \$passwd ssh-copy-id -o StrictHostKeyChecking=no \$ipaddr; done$CEND"
     cat config/vm_info | while read ipaddr passwd; do sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr; done
 }
 
 function main() {
-    echo '01_sshpass.sh'
-    echo -e '\t install_sshpass'
+    echo -e "$CSTART>01_sshpass.sh$CEND"
+    echo -e "$CSTAET>>install_sshpass$CEND"
     install_sshpass
 
-    echo -e '\t config_sshpass'
+    echo -e "$CSTAET>>config_sshpass$CEND"
     config_sshpass
 }
 

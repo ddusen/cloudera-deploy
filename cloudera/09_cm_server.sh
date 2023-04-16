@@ -36,13 +36,13 @@ function restart_server() {
 function main() {
     echo "09_cm_server.sh"
 
-    echo -e '\t\t install_server'
+    echo -e '$CSTART>>>>install_server'
     install_server
 
-    echo -e '\t\t config_server'
+    echo -e '$CSTART>>>>config_server'
     config_server
 
-    echo -e '\t\t restart_server'
+    echo -e '$CSTART>>>>restart_server'
     restart_server
 }
 

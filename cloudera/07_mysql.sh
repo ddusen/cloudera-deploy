@@ -15,19 +15,19 @@ function download_mysql() {
 
 # 安装 mysql5.6
 function install_mysql() {
-    echo -e '\t\t mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm'
+    echo -e '$CSTART>>>>mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm'
     mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm
 }
 
 # 配置 mysql5.6
 function config_mysql() {
-    echo -e '\t\t cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf'
+    echo -e '$CSTART>>>>cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf'
     cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf
 }
 
 # 重启 mysql
 function restart_mysql() {
-    echo -e '\t\t systemctl start mysql; systemctl enable mysql'
+    echo -e '$CSTART>>>>systemctl start mysql; systemctl enable mysql'
     systemctl start mysql; systemctl enable mysql;
 }
 
