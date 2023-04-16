@@ -16,7 +16,7 @@ function download_mysql() {
 # 安装 mysql5.6
 function install_mysql() {
     echo -e "$CSTART>>>>mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm$CEND"
-    mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm
+    mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && rpm -ivh /tmp/mysql5.6/rpm/*.rpm
 }
 
 # 配置 mysql5.6
