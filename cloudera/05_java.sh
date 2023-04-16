@@ -7,8 +7,6 @@
 
 set -e 
 
-HTTPD_SERVER='10.0.5.224'
-
 # 从httpd私有软件库，下载 jdk
 function download_jdk() {
     echo -e "\t\t wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/jdk-8u202-linux-x64.tar.gz"

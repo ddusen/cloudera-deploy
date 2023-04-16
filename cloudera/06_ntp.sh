@@ -7,7 +7,6 @@
 
 set -e 
 
-
 # 移除旧版本 ntp
 function remove_old_ntp() {
     echo -e '\t\t yum remove -y chrony ntp'

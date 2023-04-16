@@ -7,8 +7,6 @@
 
 set -e 
 
-HTTPD_SERVER='10.0.5.224'
-
 # 安装 cloudera manager agent
 function install_agent() {
     for i in `cat config/all_nodes`

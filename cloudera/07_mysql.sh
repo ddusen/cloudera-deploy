@@ -7,9 +7,6 @@
 
 set -e 
 
-HTTPD_SERVER='10.0.5.224'
-MYSQL_ROOT_PASSWD='@GennLife2015'
-
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
     echo -e "\t\t wget -P /tmp http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz"
