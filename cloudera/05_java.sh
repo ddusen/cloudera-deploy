@@ -20,16 +20,17 @@ function install_jdk() {
     cat config/vm_info | while read ipaddr name passwd
     do
         scp -r /opt/jdk1.8.0_202  $ipaddr:/opt
+        sed -i '/JAVA_HOME/d' /etc/profile
         scp -r config/jdk_profile  $ipaddr:/tmp/
         ssh $ipaddr "cat /tmp/jdk_profile >> /etc/profile"
         ssh $ipaddr "source /etc/profile"
-        ssh $ipaddr "mkdir /usr/java && ln -s /opt/jdk1.8.0_202 /usr/java/default"
+        ssh $ipaddr "mkdir /usr/java; ln -s /opt/jdk1.8.0_202 /usr/java/default"
     done
 }
 
 function main() {
     echo -e "$CSTART>05_java.sh$CEND"
-    
+
     echo -e "$CSTART>>download_jdk$CEND"
     download_jdk
 
