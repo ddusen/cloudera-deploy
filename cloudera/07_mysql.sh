@@ -35,6 +35,7 @@ function restart_mysql() {
 function update_database() {
     default_passwd=$(cat /root/.mysql_secret |grep password|awk '{print $18}')
     mysql -uroot -p"${default_passwd}" --connect-expired-password -e "SET PASSWORD = PASSWORD('$MYSQL_ROOT_PASSWD');"
+    sed -i "s/$default_passwd/$MYSQL_ROOT_PASSWD/" /root/.mysql_secret
     mysql -uroot -p"$MYSQL_ROOT_PASSWD" -e "SOURCE config/create_dbs.sql"
 }
 
