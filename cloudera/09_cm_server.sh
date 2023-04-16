@@ -9,28 +9,19 @@ set -e
 
 # 安装 cloudera manager server
 function install_server() {
-    cat config/vm_info | while read ipaddr name passwd
-    do 
-        ssh -n $ipaddr "rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true";
-    done
+    rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true
 }
 
 # 配置 cloudera manager server
 function config_server() {
-    cat config/vm_info | while read ipaddr name passwd
-    do 
-        ssh -n $ipaddr "cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak"
-        scp config/cm_server $ipaddr:/etc/cloudera-scm-server/db.properties
-        ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-server/db.properties"
-    done
+    cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak
+    cp config/cm_server /etc/cloudera-scm-server/db.properties
+    chmod 644 /etc/cloudera-scm-server/db.properties
 }
 
 # 重启 cloudera manager server
 function restart_server() {
-    cat config/vm_info | while read ipaddr name passwd
-    do 
-        ssh -n $ipaddr "systemctl restart cloudera-scm-server; systemctl enable cloudera-scm-server"
-    done
+    systemctl restart cloudera-scm-server; systemctl enable cloudera-scm-server
 }
 
 function main() {
