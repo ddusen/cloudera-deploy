@@ -39,3 +39,15 @@ psql --host=10.0.1.181 --port=5432 --dbname=dusen -f /gpbak/pg_dump_20230414/sch
 ```bash
 pg_restore --host=10.0.1.181 --port=5432 --dbname=dusen --schema=genncdmvv489_incre_model --table=visits_course_record --verbose /gpbak/pg_dump_20230414/datas/genncdmvv489_incre_model.visits_course_record.data
 ```
+
+*****
+
+### Examples:
+- pg_dump
+```bash
+pg_dump --dbname='omopcdm_test' --format=c --compress=4 --verbose > /tmp/omopcdm_test.data
+
+psql omopcdm_test -c 'create database omopcdm_test_new'
+
+pg_restore --dbname='omopcdm_test_new' --verbose /tmp/omopcdm_test.data
+```
