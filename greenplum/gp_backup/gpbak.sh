@@ -6,7 +6,7 @@ export GPPORT=5432
 
 BAKDIR=/gpbak
 NOW=$(date +%Y-%m-%d)
-DBNAME=(dip_test)
+DBNAME=(gdsrm)
 
 function DbBackup()
 {
