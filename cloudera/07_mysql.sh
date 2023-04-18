@@ -49,8 +49,9 @@ function update_database() {
 function install_mysql_connector() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     mkdir -p /usr/share/java
-    wget -O /tmp/mysql-connector-java-5.1.46.jar.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql-connector-java-5.1.46.jar.tar.gz
-    tar -zxvf /tmp/mysql-connector-java-5.1.46.jar.tar.gz -C /usr/share/java/
+    wget -O /tmp/mysql-connector-java-5.1.46.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql-connector-java-5.1.46.tar.gz
+    tar -zxvf /tmp/mysql-connector-java-5.1.46.tar.gz -C /tmp/
+    cp /tmp/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
 }
 
 function main() {
