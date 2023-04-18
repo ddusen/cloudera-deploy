@@ -7,7 +7,7 @@ restrict -6 default ignore
 restrict 127.0.0.1
 restrict -6 ::1
 #仅允许某个网段的客户端可以通过此服务端进行网络校时
-restrict 10.0.1.0 mask 255.255.255.0 nomodify notrap nopeer
+restrict 10.0.5.0 mask 255.255.255.0 nomodify notrap nopeer
 #使用本机时间
 server 127.127.1.0
 fudge 127.127.1.0  stratum 10

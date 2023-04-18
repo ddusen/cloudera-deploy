@@ -67,6 +67,7 @@ function config_network(){
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off;";
         ssh -n $ipaddr "systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld;";
+        ssh -n $ipaddr "systemctl stop postfix; systemctl stop libvirtd; systemctl stop firewalld;";
     done
 }
 
@@ -79,7 +80,7 @@ function main() {
     echo -e "$CSTART>>backup_configs$CEND"
     backup_configs
 
-    echo -e "$CSTART>>disable_hugepage$CEND"
+    echo -e "$CSTART>>stop_hugepage$CEND"
     disable_hugepage
 
     echo -e "$CSTART>>disable_selinux$CEND"
