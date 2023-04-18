@@ -6,6 +6,7 @@
 #updated: 2023-04-16 10:00:00
 
 set -e 
+source 00_env.sh
 
 # 下载 cm、cdh 相关的软件
 function download_files() {
@@ -37,8 +38,6 @@ function start_httpd() {
 }
 
 function main() {
-	source 00_env.sh
-	
     echo -e "$CSTART>04_httpd.sh$CEND"
     echo -e "$CSTART>>download_files$CEND"
     download_files

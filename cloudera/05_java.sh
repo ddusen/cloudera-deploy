@@ -6,6 +6,7 @@
 #updated: 2023-04-16 14:00:00
 
 set -e 
+source 00_env.sh
 
 # 从httpd私有软件库，下载 jdk
 function download_jdk() {
@@ -29,8 +30,6 @@ function install_jdk() {
 }
 
 function main() {
-	source 00_env.sh
-	
     echo -e "$CSTART>05_java.sh$CEND"
 
     echo -e "$CSTART>>download_jdk$CEND"

@@ -6,6 +6,7 @@
 #updated: 2023-04-16 14:00:00
 
 set -e 
+source 00_env.sh
 
 # 安装 cloudera manager agent 依赖
 function install_dependent() {
@@ -43,8 +44,6 @@ function restart_agent() {
 }
 
 function main() {
-	source 00_env.sh
-	
     echo -e "$CSTART>08_cm_agent.sh$CEND"
 
     echo -e "$CSTART>>>>install_dependent$CEND"

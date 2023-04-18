@@ -6,6 +6,7 @@
 #updated: 2023-04-16 15:00:00
 
 set -e 
+source 00_env.sh
 
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
@@ -47,8 +48,6 @@ function install_mysql_connector() {
 }
 
 function main() {
-	source 00_env.sh
-	
     echo -e "$CSTART>07_mysql.sh$CEND"
 
     echo -e "$CSTART>>download_mysql$CEND"

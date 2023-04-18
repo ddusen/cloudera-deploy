@@ -6,6 +6,7 @@
 #updated: 2023-04-16 11:00:00
 
 set -e 
+source 00_env.sh
 
 # 配置所有节点的 hosts
 function config_hosts() {
@@ -20,8 +21,6 @@ function config_hostname() {
 }
 
 function main() {
-	source 00_env.sh
-	
     echo -e "$CSTART>02_hosts.sh$CEND"
     echo -e "$CSTART>>config_hosts$CEND"
     config_hosts

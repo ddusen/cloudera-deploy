@@ -6,6 +6,7 @@
 #updated: 2023-04-16 10:00:00
 
 set -e 
+source 00_env.sh
 
 # 安装一些基础软件，便于后续操作
 function install_base() {
@@ -71,8 +72,6 @@ function config_network(){
 }
 
 function main() {
-	source 00_env.sh
-	
     echo -e "$CSTART>03_init.sh$CEND"
 
     echo -e "$CSTART>>install_base$CEND"

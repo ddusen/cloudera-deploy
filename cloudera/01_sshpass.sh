@@ -6,6 +6,7 @@
 #updated: 2023-04-16 10:00:00
 
 set -e 
+source 00_env.sh
 
 # 安装sshpass
 function install_sshpass() {
@@ -19,9 +20,7 @@ function config_sshpass() {
     cat config/vm_info | while read ipaddr name passwd; do sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr; done
 }
 
-function main() {
-	source 00_env.sh
-	
+function main() {	
     echo -e "$CSTART>01_sshpass.sh$CEND"
     echo -e "$CSTART>>install_sshpass$CEND"
     install_sshpass
