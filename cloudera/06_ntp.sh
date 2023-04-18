@@ -55,7 +55,7 @@ function restart_ntp() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; timedatectl set-ntp true";
+        ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; chkconfig ntpd on; timedatectl set-ntp true";
     done
 }
 

@@ -43,7 +43,7 @@ function restart_agent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "systemctl restart cloudera-scm-agent; systemctl enable cloudera-scm-agent"
+        ssh -n $ipaddr "systemctl restart cloudera-scm-agent; systemctl enable cloudera-scm-agent; chkconfig cloudera-scm-agent on"
     done
 }
 

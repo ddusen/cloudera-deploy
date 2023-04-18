@@ -33,8 +33,9 @@ function install_httpd() {
 function start_httpd() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     systemctl stop firewalld
+    systemctl restart httpd
     systemctl enable httpd
-    systemctl start httpd
+    chkconfig httpd on
 }
 
 function main() {

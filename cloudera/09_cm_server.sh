@@ -27,6 +27,7 @@ function restart_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     systemctl restart cloudera-scm-server; 
     systemctl enable cloudera-scm-server;
+    chkconfig cloudera-scm-server on
 }
 
 function main() {
