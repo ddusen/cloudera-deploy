@@ -8,8 +8,16 @@
 set -e 
 source 00_env
 
+# 清理 mysql 服务
+function clean_mysql() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    systemctl stop mysql*
+    yum remove -y mysql*
+    yum remove -y MySQL*
+}
+
 # 清理所有服务器上的 cloudera 服务
-function clean() {
+function clean_cloudera() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
@@ -21,7 +29,12 @@ function clean() {
 }
 
 function main() {
-    clean
+    echo -e "$CSTART>unsafe_clean.sh$CEND"
+    echo -e "$CSTART>>clean_mysql$CEND"
+    clean_mysql
+
+    echo -e "$CSTART>>clean_cloudera$CEND"
+    clean_cloudera
 }
 
 main

@@ -18,6 +18,8 @@ function reboot() {
 }
 
 function main() {
+    echo -e "$CSTART>reboot.sh$CEND"
+    echo -e "$CSTART>>reboot$CEND"
     reboot
 }
 
