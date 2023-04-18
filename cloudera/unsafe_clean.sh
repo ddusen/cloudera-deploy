@@ -13,9 +13,9 @@ function clean_java() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "unlink /usr/java/default"
+        ssh -n $ipaddr "unlink /usr/java/default";
         ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile";
-        ssh -n $ipaddr "rm -rf /opt/jdk1.8.0_202"
+        ssh -n $ipaddr "rm -rf /opt/jdk1.8.0_202";
     done
 }
 
@@ -42,13 +42,13 @@ function clean_cloudera() {
 function main() {
     echo -e "$CSTART>unsafe_clean.sh$CEND"
     echo -e "$CSTART>>clean_java$CEND"
-    clean_java
+    clean_java || true
 
     echo -e "$CSTART>>clean_mysql$CEND"
-    clean_mysql
+    clean_mysql || true
 
     echo -e "$CSTART>>clean_cloudera$CEND"
-    clean_cloudera
+    clean_cloudera || true
 }
 
 main
