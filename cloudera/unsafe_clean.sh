@@ -53,6 +53,7 @@ function clean_cloudera() {
         ssh -n $ipaddr "rm -rf /opt/cloudera*"
         ssh -n $ipaddr "rm -rf /etc/cloudera*"
         ssh -n $ipaddr "rm -rf /var/lib/cloudera*"
+        ssh -n $ipaddr "rm -rf /var/log/cloudera*"
     done
 }
 
