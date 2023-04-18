@@ -6,7 +6,7 @@
 #updated: 2023-04-16 11:00:00
 
 set -e 
-source 00_env.sh
+source 00_env
 
 # 配置所有节点的 hosts
 function config_hosts() {

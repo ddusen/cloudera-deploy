@@ -6,7 +6,7 @@
 #updated: 2023-04-16 16:00:00
 
 set -e 
-source 00_env.sh
+source 00_env
 
 # 安装 cloudera manager server
 function install_server() {

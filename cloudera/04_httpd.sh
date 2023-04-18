@@ -6,7 +6,7 @@
 #updated: 2023-04-16 10:00:00
 
 set -e 
-source 00_env.sh
+source 00_env
 
 # 下载 cm、cdh 相关的软件
 function download_files() {

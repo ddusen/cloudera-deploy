@@ -6,7 +6,7 @@
 #updated: 2023-04-16 14:00:00
 
 set -e 
-source 00_env.sh
+source 00_env
 
 # 移除旧版本 ntp
 function remove_old_ntp() {

@@ -6,16 +6,18 @@
 #updated: 2023-04-16 21:00:00
 
 set -e 
+source 00_env
 
 # 重启机器
 function reboot() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do echo $ipaddr; ssh -n $ipaddr "reboot"; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do echo $ipaddr; ssh -n $ipaddr "reboot" || true; done
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND";
+        ssh -n $ipaddr "reboot" || true;
+    done
 }
 
 function main() {
-	source 00_env.sh
-	
     reboot
 }
 

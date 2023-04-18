@@ -6,7 +6,7 @@
 #updated: 2023-04-16 15:00:00
 
 set -e 
-source 00_env.sh
+source 00_env
 
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
