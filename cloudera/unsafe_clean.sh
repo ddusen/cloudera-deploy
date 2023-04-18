@@ -8,6 +8,17 @@
 set -e 
 source 00_env
 
+# 避免误操作，添加输入密码步骤
+function identification() {
+    read -s -p "请输入密码: " pswd
+    md5pswd=$(echo $pswd | md5)
+    if [[ "$md5pswd" == "f0569dfda0addd953803fd8e308d796e" ]]; then
+        true
+    else
+        false
+    fi
+}
+
 # 清理 java 服务
 function clean_java() {
     cat config/vm_info | while read ipaddr name passwd
@@ -45,6 +56,10 @@ function clean_cloudera() {
 
 function main() {
     echo -e "$CSTART>unsafe_clean.sh$CEND"
+
+    echo -e "$CSTART>>identification$CEND"
+    identification
+
     echo -e "$CSTART>>clean_java$CEND"
     clean_java || true
 
