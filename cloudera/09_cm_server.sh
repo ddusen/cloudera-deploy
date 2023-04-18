@@ -10,26 +10,23 @@ source 00_env.sh
 
 # 安装 cloudera manager server
 function install_server() {
-    echo -e "$CSTART>>>>rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true$CEND"
-    rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm;
 }
 
 # 配置 cloudera manager server
 function config_server() {
-    echo -e "$CSTART>>>>cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak$CEND"
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak
-
-    echo -e "$CSTART>>>>cp config/cm_server /etc/cloudera-scm-server/db.properties$CEND"
     cp config/cm_server /etc/cloudera-scm-server/db.properties
-
-    echo -e "$CSTART>>>>chmod 644 /etc/cloudera-scm-server/db.properties$CEND"
     chmod 644 /etc/cloudera-scm-server/db.properties
 }
 
 # 重启 cloudera manager server
 function restart_server() {
-    echo -e "$CSTART>>>>systemctl restart cloudera-scm-server; systemctl enable cloudera-scm-server$CEND"
-    systemctl restart cloudera-scm-server; systemctl enable cloudera-scm-server
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    systemctl restart cloudera-scm-server; 
+    systemctl enable cloudera-scm-server;
 }
 
 function main() {

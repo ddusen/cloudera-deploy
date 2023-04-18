@@ -10,30 +10,35 @@ source 00_env.sh
 
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
-    echo -e "$CSTART>>>>wget -O /tmp/mysql5.6.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz$CEND"
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     wget -O /tmp/mysql5.6.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz
 }
 
 # 安装 mysql5.6
 function install_mysql() {
-    echo -e "$CSTART>>>>mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && yum install -y /tmp/mysql5.6/rpm/*.rpm$CEND"
-    mkdir -p /tmp/mysql5.6/rpm && tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm && rpm -ivh /tmp/mysql5.6/rpm/*.rpm || true
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    mkdir -p /tmp/mysql5.6/rpm;
+    tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm;
+    rpm -ivh /tmp/mysql5.6/rpm/*.rpm;
 }
 
 # 配置 mysql5.6
 function config_mysql() {
-    echo -e "$CSTART>>>>cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf$CEND"
-    cp /etc/my.cnf /etc/my.cnf.bak && cp config/my.cnf /etc/my.cnf
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    cp /etc/my.cnf /etc/my.cnf.bak;
+    cp config/my.cnf /etc/my.cnf;
 }
 
 # 重启 mysql
 function restart_mysql() {
-    echo -e "$CSTART>>>>systemctl start mysql; systemctl enable mysql$CEND"
-    systemctl start mysql; systemctl enable mysql;
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    systemctl start mysql;
+    systemctl enable mysql;
 }
 
 # 更新数据库，在 mysql 中创建用户，添加新用户和数据库
 function update_database() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     default_passwd=$(cat /root/.mysql_secret |grep password|awk '{print $18}')
     mysql -uroot -p"${default_passwd}" --connect-expired-password -e "SET PASSWORD = PASSWORD('$MYSQL_ROOT_PASSWD');"
     sed -i "s/$default_passwd/$MYSQL_ROOT_PASSWD/" /root/.mysql_secret
@@ -42,6 +47,7 @@ function update_database() {
 
 # 安装mysql插件：mysql-connector-java
 function install_mysql_connector() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     mkdir -p /usr/share/java
     wget -O /tmp/mysql-connector-java-5.1.46.jar.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql-connector-java-5.1.46.jar.tar.gz
     tar -zxvf /tmp/mysql-connector-java-5.1.46.jar.tar.gz -C /usr/share/java/

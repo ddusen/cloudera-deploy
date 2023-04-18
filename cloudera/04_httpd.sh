@@ -18,20 +18,20 @@ function download_files() {
 
 # 解压到指定目录
 function unzip_files() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     dist_dir="/var/www/html/cloudera"
-    echo -e "$CSTART>>>>mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir$CEND"
     mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir
 }
 
 # 安装 httpd：用作私有化 cm、cdh 的软件仓库
 function install_httpd() {
-    echo -e "$CSTART>>>>yum install -y httpd$CEND"
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     yum install -y httpd
 }
 
 # 启动 httpd
 function start_httpd() {
-    echo -e "$CSTART>>>>systemctl stop firewalld; systemctl enable httpd; systemctl start httpd$CEND"
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     systemctl stop firewalld
     systemctl enable httpd
     systemctl start httpd

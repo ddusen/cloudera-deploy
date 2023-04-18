@@ -10,14 +10,17 @@ source 00_env.sh
 
 # 安装sshpass
 function install_sshpass() {
-    echo -e "$CSTART>>>>yum install -y sshpass$CEND"
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
     yum install -y sshpass
 }
 
 # 配置免密
 function config_sshpass() {
-    echo -e "$CSTART>>>>cat config/vm_info | while read ipaddr name passwd; do sshpass -p \$passwd ssh-copy-id -o StrictHostKeyChecking=no \$ipaddr; done$CEND"
-    cat config/vm_info | while read ipaddr name passwd; do sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr; done
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr
+    done
 }
 
 function main() {	
