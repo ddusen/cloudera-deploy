@@ -13,9 +13,9 @@ function clean_java() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "unlink /usr/java/default";
         ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile";
         ssh -n $ipaddr "rm -rf /opt/jdk1.8.0_202";
+        ssh -n $ipaddr "unlink /usr/java/default";
     done
 }
 
