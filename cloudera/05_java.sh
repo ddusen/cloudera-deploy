@@ -25,7 +25,7 @@ function install_jdk() {
         ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile";
         ssh -n $ipaddr "cat /tmp/jdk_profile >> /etc/profile";
         ssh -n $ipaddr "source /etc/profile";
-        ssh -n $ipaddr "mkdir /usr/java; ln -s /opt/jdk1.8.0_202 /usr/java/default";
+        ssh -n $ipaddr "mkdir -p /usr/java; ln -s /opt/jdk1.8.0_202 /usr/java/default";
     done
 }
 
