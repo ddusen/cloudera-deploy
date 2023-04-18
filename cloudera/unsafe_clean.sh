@@ -14,7 +14,6 @@ function clean() {
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "systemctl stop cloudera*"
-        ssh -n $ipaddr "systemctl disable cloudera*"
         ssh -n $ipaddr "yum remove -y cloudera*"
         ssh -n $ipaddr "rm -rf /opt/cloudera*"
         ssh -n $ipaddr "rm -rf /etc/cloudera*"
