@@ -22,6 +22,21 @@ function config_server() {
     chmod 644 /etc/cloudera-scm-server/db.properties
 }
 
+# 配置 本地存储库
+function config_parcel_repo() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    parcel_dir='/opt/cloudera/parcel-repo'
+    mkdir -p $parcel_dir
+    wget -O $parcel_dir/ $HTTPD_SERVER/others/jdk-8u202-linux-x64.tar.gz
+    wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel
+    wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha
+    wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha1 $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha1
+    wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent
+    wget -O $parcel_dir/manifest.json $HTTPD_SERVER/cdh6/6.3.2/parcels/manifest.json
+    chown -R cloudera-scm:cloudera-scm $parcel_dir
+    chmod -R ugo+rX $parcel_dir
+}
+
 # 重启 cloudera manager server
 function restart_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
@@ -38,6 +53,9 @@ function main() {
 
     echo -e "$CSTART>>config_server$CEND"
     config_server
+
+    echo -e "$CSTART>>config_parcel_repo$CEND"
+    config_parcel_repo
 
     echo -e "$CSTART>>restart_server$CEND"
     restart_server
