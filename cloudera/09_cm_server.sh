@@ -11,7 +11,7 @@ source 00_env
 # 安装 cloudera manager server
 function install_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true
+    rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm
 }
 
 # 配置 cloudera manager server
@@ -50,7 +50,7 @@ function main() {
     echo -e "$CSTART>09_cm_server.sh$CEND"
 
     echo -e "$CSTART>>install_server$CEND"
-    install_server
+    install_server || true # 忽略报错
 
     echo -e "$CSTART>>config_server$CEND"
     config_server

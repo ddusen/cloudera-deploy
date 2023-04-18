@@ -19,7 +19,7 @@ function install_mysql() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     mkdir -p /tmp/mysql5.6/rpm
     tar -zxvf /tmp/mysql5.6.tar.gz -C /tmp/mysql5.6/rpm
-    rpm -ivh /tmp/mysql5.6/rpm/*.rpm || true
+    rpm -ivh /tmp/mysql5.6/rpm/*.rpm || true # 忽略报错
 }
 
 # 配置 mysql5.6

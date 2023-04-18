@@ -90,7 +90,7 @@ function main() {
     config_ssh
 
     echo -e "$CSTART>>config_network$CEND"
-    config_network
+    config_network || true # 忽略报错
 }
 
 main
