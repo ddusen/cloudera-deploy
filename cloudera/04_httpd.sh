@@ -18,9 +18,10 @@ function download_files() {
 
 # 解压到指定目录
 function unzip_files() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    dist_dir="/var/www/html/cloudera"
-    mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir
+    # echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    # dist_dir="/var/www/html/cloudera"
+    # mkdir -p $dist_dir && tar -zxvf /opt/$FILENAME -C $dist_dir
+    echo 'pass'
 }
 
 # 安装 httpd：用作私有化 cm、cdh 的软件仓库
