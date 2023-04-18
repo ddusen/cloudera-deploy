@@ -13,9 +13,9 @@ function identification() {
     read -s -p "请输入密码: " pswd
     md5pswd=$(echo $pswd | sha1sum | head -c 10)
     if [[ "$md5pswd" == "d5b3776603" ]]; then
-        true
+        echo && true
     else
-        false
+        echo && false
     fi
 }
 
