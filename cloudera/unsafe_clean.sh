@@ -11,7 +11,7 @@ source 00_env
 # 避免误操作，添加输入密码步骤
 function identification() {
     read -s -p "请输入密码: " pswd
-    md5pswd=$(echo $pswd | sha1hex | head -c 10)
+    md5pswd=$(echo $pswd | sha1sum | head -c 10)
     if [[ "$md5pswd" == "d5b3776603" ]]; then
         true
     else
