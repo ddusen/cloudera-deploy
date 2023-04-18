@@ -25,7 +25,7 @@ function install_mysql() {
 # 配置 mysql5.6
 function config_mysql() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    cp /etc/my.cnf /etc/my.cnf.bak;
+    cp /etc/my.cnf /etc/my.cnf.bak || true # 忽略报错
     cp config/my.cnf /etc/my.cnf;
 }
 
