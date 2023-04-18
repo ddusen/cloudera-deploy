@@ -16,11 +16,10 @@ vi /home/gpadmin/scripts/gprst.sh
 - [gprst.sh](gprst.sh)
 
 ### 配置定时任务
-- 每天凌晨一点执行备份
+- 每三天的凌晨一点执行备份
 ```c
 crontab -l
-
-0 1 * * * /bin/bash /home/gpadmin/scripts/gpbak.sh 2>&1 >> /tmp/gpbackup.log
+0 1 */3 * *  nohup /bin/bash /home/gpadmin/scripts/gpbackup.sh 2>&1 > /tmp/gpbackup.log &
 ```
 
 ### Examples:
