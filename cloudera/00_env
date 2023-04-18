@@ -10,13 +10,13 @@ export CSTART="\033[36m"
 export CEND="\033[0m"
 
 ## 文件名称
-export FILENAME="cloudera.6.3.1466458.tar.gz"
+export FILENAME="cloudera-parcels.6.3.1466458.tar.gz"
 
 ## 中控机 IP
 export CCC="10.0.5.224"
 
-## httpd server ip
-export HTTPD_SERVER="10.0.5.224"
+## httpd server address
+export HTTPD_SERVER="http://10.0.5.224/cloudera-parcels"
 
 ## MySQL
 export MYSQL_ROOT_PASSWD="@GennLife2015"

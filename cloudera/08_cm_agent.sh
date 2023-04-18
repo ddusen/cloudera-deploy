@@ -22,8 +22,8 @@ function install_agent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm || true";
-        ssh -n $ipaddr "rpm -ivh http://$HTTPD_SERVER/cloudera/cm6/6.3.1/cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm || true";
+        ssh -n $ipaddr "rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm || true";
+        ssh -n $ipaddr "rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm || true";
     done
 }
 

@@ -47,4 +47,11 @@
 - 需要 `config/cm_server` 中的 `*.host` 变量
 - [./09_cm_server.sh](./09_cm_server.sh)
 
+*****
+
 ## 二、CDH 安装
+
+### 1. 许可证选择
+- [cdh-01](./images/cdh-01.png)
+
+### 2. 主机选择

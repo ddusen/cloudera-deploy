@@ -11,7 +11,7 @@ source 00_env
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    wget -O /tmp/mysql5.6.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql5.6.tar.gz
+    wget -O /tmp/mysql5.6.tar.gz $HTTPD_SERVER/packages/mysql5.6.tar.gz
 }
 
 # 安装 mysql5.6
@@ -50,7 +50,7 @@ function update_database() {
 function install_mysql_connector() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     mkdir -p /usr/share/java
-    wget -O /tmp/mysql-connector-java-5.1.46.tar.gz http://$HTTPD_SERVER/cloudera/packages/mysql-connector-java-5.1.46.tar.gz
+    wget -O /tmp/mysql-connector-java-5.1.46.tar.gz $HTTPD_SERVER/packages/mysql-connector-java-5.1.46.tar.gz
     tar -zxvf /tmp/mysql-connector-java-5.1.46.tar.gz -C /tmp/
     cp /tmp/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
 }
