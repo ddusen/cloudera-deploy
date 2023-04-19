@@ -8,6 +8,15 @@
 set -e 
 source 00_env
 
+# 备份 ntp config
+function backup_ntp_config() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND";
+        ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak";
+    done
+}
+
 # 移除旧版本 ntp
 function remove_old_ntp() {
     cat config/vm_info | while read ipaddr name passwd
@@ -23,15 +32,6 @@ function install_ntp() {
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "yum install -y ntp";
-    done
-}
-
-# 备份 ntp config
-function backup_ntp_config() {
-    cat config/vm_info | while read ipaddr name passwd
-    do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak";
     done
 }
 
@@ -62,14 +62,14 @@ function restart_ntp() {
 function main() {
     echo -e "$CSTART>06_ntp.sh$CEND"
 
+    echo -e "$CSTART>>backup_ntp_config$CEND"
+    backup_ntp_config
+    
     echo -e "$CSTART>>remove_old_ntp$CEND"
     remove_old_ntp
 
     echo -e "$CSTART>>install_ntp$CEND"
     install_ntp
-
-    echo -e "$CSTART>>backup_ntp_config$CEND"
-    backup_ntp_config
 
     echo -e "$CSTART>>config_ntp_clients$CEND"
     config_ntp_clients
