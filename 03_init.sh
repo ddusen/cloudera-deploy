@@ -14,7 +14,7 @@ function install_base() {
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp rpms/*.rpm $ipaddr:/tmp/
-        ssh -n $ipaddr "rpm -Uvh /tmp/*.rpm"; 
+        ssh -n $ipaddr "rpm -Uvh /tmp/*.rpm" || true
     done
 }
 
