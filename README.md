@@ -16,6 +16,8 @@
 - http://119.254.145.21:12225/owncloud/index.php/s/WIRsdWWQgnB1jHa
 - 如果网盘链接失效，去网盘目录下找该包：03-大数据/01-CDH/cloudera-parcels.6.3.1466458.tar.gz
 
+> 备用网盘：https://www.aliyundrive.com/s/nLvmmaDd3fA
+
 2. 把压缩包解压到 /var/www/html 目录下
 ```bash
 tar -zxvf cloudera-parcels.6.3.1466458.tar.gz -C /var/www/html/
