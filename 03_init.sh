@@ -18,7 +18,7 @@ function install_base() {
 }
 
 # 备份一些配置文件
-function backup_configs(){
+function backup_configs() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
@@ -31,7 +31,7 @@ function backup_configs(){
 }
 
 # 禁用 hugepage
-function disable_hugepage(){
+function disable_hugepage() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
@@ -41,7 +41,7 @@ function disable_hugepage(){
 }
 
 # 关闭 selinux
-function disable_selinux(){
+function disable_selinux() {
     cat config/vm_info | while read ipaddr name passwd
     do
         ssh -n $ipaddr "sed -i '/^SELINUX=/cSELINUX=disabled' /etc/selinux/config;"; 
@@ -49,7 +49,7 @@ function disable_selinux(){
 }
 
 # 配置ssh
-function config_ssh(){
+function config_ssh() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
@@ -61,13 +61,30 @@ function config_ssh(){
 }
 
 # 配置网络策略
-function config_network(){
+function config_network() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off;";
         ssh -n $ipaddr "systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld;";
         ssh -n $ipaddr "systemctl stop postfix; systemctl stop libvirtd; systemctl stop firewalld;";
+    done
+}
+
+# 配置一些插件 jars
+function config_jars() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "mkdir -p /usr/share/java"
+        ssh -n $ipaddr "wget -O /tmp/mysql-connector-java.jar.tar.gz $HTTPD_SERVER/others/mysql-connector-java.jar.tar.gz"
+        ssh -n $ipaddr "tar -zxvf /tmp/mysql-connector-java.jar.tar.gz -C /usr/share/java/"
+
+        ssh -n $ipaddr "mkdir -P /user/share/hive"
+        ssh -n $ipaddr "wget -O /tmp/commons-httpclient-3.1.jar.tar.gz $HTTPD_SERVER/others/commons-httpclient-3.1.jar.tar.gz"
+        ssh -n $ipaddr "wget -O /tmp/elasticsearch-hadoop-6.3.0.jar.tar.gz $HTTPD_SERVER/others/elasticsearch-hadoop-6.3.0.jar.tar.gz"
+        ssh -n $ipaddr "tar -zxvf /tmp/commons-httpclient-3.1.jar.tar.gz -C /usr/share/hive/"
+        ssh -n $ipaddr "tar -zxvf /tmp/elasticsearch-hadoop-6.3.0.jar.tar.gz -C /usr/share/hive/"
     done
 }
 
@@ -91,6 +108,9 @@ function main() {
 
     echo -e "$CSTART>>config_network$CEND"
     config_network || true # 忽略报错
+
+    echo -e "$CSTART>>config_jars$CEND"
+    config_jars
 }
 
 main

@@ -46,15 +46,6 @@ function update_database() {
     mysql -uroot -p"$MYSQL_ROOT_PASSWD" -e "SOURCE config/create_dbs.sql"
 }
 
-# 安装mysql插件：mysql-connector-java
-function install_mysql_connector() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    mkdir -p /usr/share/java
-    wget -O /tmp/mysql-connector-java-5.1.46.tar.gz $HTTPD_SERVER/others/mysql-connector-java-5.1.46.tar.gz
-    tar -zxvf /tmp/mysql-connector-java-5.1.46.tar.gz -C /tmp/
-    cp /tmp/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
-}
-
 function main() {
     echo -e "$CSTART>07_mysql.sh$CEND"
 
@@ -72,10 +63,6 @@ function main() {
 
     echo -e "$CSTART>>update_database$CEND"
     update_database
-
-    echo -e "$CSTART>>install_mysql_connector$CEND"
-    install_mysql_connector
-
 }
 
 main
