@@ -13,7 +13,8 @@ function install_base() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "yum install -y wget net-tools epel-release htop"; 
+        scp rpms/*.rpm $ipaddr:/tmp/
+        ssh -n $ipaddr "rpm -Uvh /tmp/*.rpm"; 
     done
 }
 
