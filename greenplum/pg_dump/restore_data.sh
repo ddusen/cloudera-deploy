@@ -1,1 +1,0 @@
-pg_restore --host=10.0.1.181 --port=5432 --dbname=dusen --schema=genncdmvv489_incre_model --table=visits_course_record --verbose /gpbak/pg_dump_20230414/datas/genncdmvv489_incre_model.visits_course_record.data
