@@ -6,7 +6,7 @@
 - CDH 版本：6.3.2
 - MySQL 版本：5.6
 - Java 版本：1.8
-- 系统版本：Centos 7.9
+- 系统版本：Centos 7.6
 
 *****
 
@@ -71,3 +71,58 @@ tar -zxvf cloudera-parcels.6.3.1466458.tar.gz -C /var/www/html/
 - ![cdh-05](./images/cdh-05.png)
 - ![cdh-06](./images/cdh-06.png)
 - ![cdh-07](./images/cdh-07.png)
+
+
+## 三、其它
+- cloudera-parcels.6.3.1466458.tar.gz
+
+```bash
+[root@cdh-cm-01 html]# tree /var/www/html/cloudera-parcels
+
+/var/www/html/cloudera-parcels
+|-- cdh6
+|   `-- 6.3.2
+|       |-- parcels
+|       |   |-- CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel
+|       |   |-- CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha
+|       |   |-- CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha1
+|       |   |-- CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent
+|       |   |-- CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent.sha
+|       |   |-- CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent.sha1
+|       |   `-- manifest.json
+|       `-- repodata
+|           |-- 3a35421df8da570216fafda251a8cd1a4c2fc37155d1d18010b5f5a46bdc0a5d-primary.xml.gz
+|           |-- 710c575c5de134cb3c6ea77351f88d00023989fede649d86e3c9e8ff50cb682d-primary.sqlite.bz2
+|           |-- 8167eea778b6a0b03ead6727b79688abbc73e60039a8b13b1bae0a4733859101-filelists.sqlite.bz2
+|           |-- bfdce844b7bda72ee4ce3112b02ee6f4f197064fe1a431596d80a6c35a615e43-filelists.xml.gz
+|           |-- d127523a2c5208b48b95b77c8dc84ac96c977f9a0ed62277b6c121940f4df9c8-other.sqlite.bz2
+|           |-- e73de49a28463ac284f0ed931d8628a5f6d2cee86f219c4a23e53d6c2a0516af-other.xml.gz
+|           `-- repomd.xml
+|-- cm6
+|   `-- 6.3.1
+|       |-- allkeys.asc
+|       |-- cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm
+|       |-- cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm
+|       |-- cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm
+|       |-- manifest.json
+|       |-- repodata
+|       |   |-- 3a35421df8da570216fafda251a8cd1a4c2fc37155d1d18010b5f5a46bdc0a5d-primary.xml.gz
+|       |   |-- 710c575c5de134cb3c6ea77351f88d00023989fede649d86e3c9e8ff50cb682d-primary.sqlite.bz2
+|       |   |-- 8167eea778b6a0b03ead6727b79688abbc73e60039a8b13b1bae0a4733859101-filelists.sqlite.bz2
+|       |   |-- bfdce844b7bda72ee4ce3112b02ee6f4f197064fe1a431596d80a6c35a615e43-filelists.xml.gz
+|       |   |-- d127523a2c5208b48b95b77c8dc84ac96c977f9a0ed62277b6c121940f4df9c8-other.sqlite.bz2
+|       |   |-- e73de49a28463ac284f0ed931d8628a5f6d2cee86f219c4a23e53d6c2a0516af-other.xml.gz
+|       |   `-- repomd.xml
+|       |-- RPM-GPG-KEY-cloudera
+|       `-- RPMS
+|           `-- x86_64
+|               `-- oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm
+`-- others
+    |-- commons-httpclient-3.1.jar.tar.gz
+    |-- elasticsearch-hadoop-6.3.0.jar.tar.gz
+    |-- jdk-8u202-linux-x64.tar.gz
+    |-- mysql5.6.tar.gz
+    `-- mysql-connector-java.jar.tar.gz
+
+10 directories, 33 files
+```
