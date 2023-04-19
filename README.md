@@ -63,7 +63,11 @@ tar -zxvf cloudera-parcels.6.3.1466458.tar.gz -C /var/www/html/
 
 ## 二、CDH 安装
 
-### 1. 许可证选择
-- [cdh-01](./images/cdh-01.png)
-
-### 2. 主机选择
+- ![cdh-00](./images/cdh-00.png)
+- ![cdh-01](./images/cdh-01.png)
+- ![cdh-02](./images/cdh-02.png)
+- ![cdh-03](./images/cdh-03.png)
+- ![cdh-04](./images/cdh-04.png)
+- ![cdh-05](./images/cdh-05.png)
+- ![cdh-06](./images/cdh-06.png)
+- ![cdh-07](./images/cdh-07.png)
