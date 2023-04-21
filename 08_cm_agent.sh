@@ -13,7 +13,7 @@ function install_dependent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "yum install -y bind-utils psmisc cyrus-sasl-plain cyrus-sasl-gssapi fuse portmap fuse-libs /lib/lsb/init-functions httpd mod_ssl openssl-devel python-psycopg2 MySQL-python libxslt || true";
+        ssh -n $ipaddr "yum install -y perl perl-devel bind-utils psmisc cyrus-sasl-plain cyrus-sasl-gssapi fuse portmap fuse-libs /lib/lsb/init-functions httpd mod_ssl openssl-devel python-psycopg2 MySQL-python libxslt || true";
     done
 }
 
