@@ -29,6 +29,23 @@ function install_jdk() {
     done
 }
 
+# 配置一些插件 jars
+function config_jars() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "mkdir -p /usr/share/java"
+        ssh -n $ipaddr "wget -O /tmp/mysql-connector-java.jar.tar.gz $HTTPD_SERVER/others/mysql-connector-java.jar.tar.gz"
+        ssh -n $ipaddr "tar -zxvf /tmp/mysql-connector-java.jar.tar.gz -C /usr/share/java"
+
+        ssh -n $ipaddr "mkdir -p /usr/share/hive"
+        ssh -n $ipaddr "wget -O /tmp/commons-httpclient-3.1.jar.tar.gz $HTTPD_SERVER/others/commons-httpclient-3.1.jar.tar.gz"
+        ssh -n $ipaddr "wget -O /tmp/elasticsearch-hadoop-6.3.0.jar.tar.gz $HTTPD_SERVER/others/elasticsearch-hadoop-6.3.0.jar.tar.gz"
+        ssh -n $ipaddr "tar -zxvf /tmp/commons-httpclient-3.1.jar.tar.gz -C /usr/share/hive"
+        ssh -n $ipaddr "tar -zxvf /tmp/elasticsearch-hadoop-6.3.0.jar.tar.gz -C /usr/share/hive"
+    done
+}
+
 function main() {
     echo -e "$CSTART>05_java.sh$CEND"
 
@@ -37,6 +54,9 @@ function main() {
 
     echo -e "$CSTART>>install_jdk$CEND"
     install_jdk
+    
+    echo -e "$CSTART>>config_jars$CEND"
+    config_jars
 }
 
 main
