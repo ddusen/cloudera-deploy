@@ -32,7 +32,7 @@ function config_agent() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak"
+        ssh -n $ipaddr "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak" || true
         scp config/cm_agent $ipaddr:/etc/cloudera-scm-agent/config.ini
         ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-agent/config.ini"
     done
