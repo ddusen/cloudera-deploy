@@ -13,7 +13,7 @@ function backup_ntp_config() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak";
+        ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak" || true
     done
 }
 
