@@ -15,6 +15,7 @@ function install_base() {
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp rpms/*.rpm $ipaddr:/tmp/
         ssh -n $ipaddr "rpm -Uvh /tmp/*.rpm" || true
+        ssh -n $ipaddr "yum install -y wget net-tools" || true
     done
 }
 
@@ -92,5 +93,6 @@ function main() {
 
     echo -e "$CSTART>>config_network$CEND"
     config_network || true # 忽略报错
+}
 
 main
