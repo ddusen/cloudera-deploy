@@ -2,7 +2,7 @@
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
 10.32.20.219 cdh-node-01
-10.32.20.228 cdh-node-02
+10.32.20.229 cdh-node-02
 10.32.20.238 cdh-node-03
 10.32.20.239 cdh-node-04
 10.32.20.218 cdh-cm-01
