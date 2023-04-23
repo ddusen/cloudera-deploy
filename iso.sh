@@ -5,6 +5,8 @@
 #created: 2023-04-16 21:00:00
 #updated: 2023-04-16 21:00:00
 
+# 挂载 ISO，并配置 yum 源
+
 set -e 
 source 00_env
 
