@@ -35,6 +35,7 @@ function config_agent() {
         ssh -n $ipaddr "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak" || true
         scp config/cm_agent $ipaddr:/etc/cloudera-scm-agent/config.ini
         ssh -n $ipaddr "chmod 644 /etc/cloudera-scm-agent/config.ini"
+        ssh -n $ipaddr "mkdir -p /run/user/0"
     done
 }
 
