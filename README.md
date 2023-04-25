@@ -12,13 +12,13 @@
 
 ## 前提
 
-1. 从公司云盘下载软件包 cloudera-parcels.6.3.1466458.tar.gz 到脚本执行机器中。
-- http://119.254.145.21:12225/owncloud/index.php/s/WIRsdWWQgnB1jHa
-- 如果网盘链接失效，去网盘目录下找该包：03-大数据/01-CDH/cloudera-parcels.6.3.1466458.tar.gz
+1. 从公司云盘下载软件包 cloudera-parcels.6.3.1.20230420.tar.gz 到脚本执行机器中。
+- http://119.254.145.21:12225/owncloud/index.php/s/wR6tBJApQoCu8qH
+- 如果网盘链接失效，去网盘目录下找该包：03-大数据/01-CDH/cloudera-parcels.6.3.1.20230420.tar.gz
 
 2. 把压缩包解压到 /var/www/html 目录下
 ```bash
-tar -zxvf cloudera-parcels.6.3.1466458.tar.gz -C /var/www/html/
+tar -zxvf cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 ```
 
 ## 一、CM 安装
