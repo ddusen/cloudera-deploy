@@ -45,7 +45,7 @@ tar -zxvf cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 - [./05_java.sh](./05_java.sh)
 
 ### 6. 安装 ntp
-- 需要修改 `config/ntp_clients` 中的 ntp server ip `10.32.20.218`
+- 需要修改 `config/ntp_clients` 中的 ntp server ip `10.0.1.101`
 - [./06_ntp.sh](./06_ntp.sh)
 
 ### 7. 安装 mysql

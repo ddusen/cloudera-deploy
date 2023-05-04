@@ -12,7 +12,7 @@
 
 [General]
 # Hostname of the CM server.
-server_host=10.32.20.218
+server_host=10.0.1.101
 
 # Port that the CM server is listening on.
 server_port=7182
