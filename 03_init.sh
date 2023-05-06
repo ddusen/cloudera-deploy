@@ -19,16 +19,28 @@ function install_base() {
     done
 }
 
+# 设置时区为 Asia/Shanghai
+function set_timezone() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        # 创建时区软链接
+        ssh -n $ipaddr "ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime" || true
+        # 如果软链接已经存在，修改它，避免第一步失败
+        ssh -n $ipaddr "ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime" || true
+    done
+}
+
 # 备份一些配置文件
 function backup_configs() {
     cat config/vm_info | while read ipaddr name passwd
     do 
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "mkdir -p /opt/backup_sys_configs;";
-        ssh -n $ipaddr "cp /etc/security/limits.conf /opt/backup_sys_configs;";
-        ssh -n $ipaddr "cp /etc/security/limits.d/20-nproc.conf /opt/backup_sys_configs;";
-        ssh -n $ipaddr "cp /etc/sysctl.conf /opt/backup_sys_configs;";
-        ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup_sys_configs";
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "mkdir -p /opt/backup_sys_configs"
+        ssh -n $ipaddr "cp /etc/security/limits.conf /opt/backup_sys_configs"
+        ssh -n $ipaddr "cp /etc/security/limits.d/20-nproc.conf /opt/backup_sys_configs"
+        ssh -n $ipaddr "cp /etc/sysctl.conf /opt/backup_sys_configs"
+        ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup_sys_configs"
+        ssh -n $ipaddr "cp /etc/fstab /opt/backup_sys_configs"
     done
 }
 
@@ -46,7 +58,15 @@ function disable_hugepage() {
 function disable_selinux() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        ssh -n $ipaddr "sed -i '/^SELINUX=/cSELINUX=disabled' /etc/selinux/config;"; 
+        ssh -n $ipaddr "sed -i '/^SELINUX=/cSELINUX=disabled' /etc/selinux/config"
+    done
+}
+
+# 关闭 swap
+function disable_swap() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        ssh -n $ipaddr "sed -i '/swap / s/^\(.*\)$/#\1/g' test.txt"
     done
 }
 
@@ -55,10 +75,10 @@ function config_ssh() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "sed -i '/^#UseDNS/cUseDNS no' /etc/ssh/sshd_config;";
-        ssh -n $ipaddr "sed -i '/^GSSAPIAuthentication/cGSSAPIAuthentication no' /etc/ssh/sshd_config;";
-        ssh -n $ipaddr "sed -i '/^GSSAPICleanupCredentials/cGSSAPICleanupCredentials no' /etc/ssh/sshd_config;";
-        ssh -n $ipaddr "sed -i '/^#MaxStartups/cMaxStartups 10000:30:20000' /etc/ssh/sshd_config;";
+        ssh -n $ipaddr "sed -i '/^#UseDNS/cUseDNS no' /etc/ssh/sshd_config"
+        ssh -n $ipaddr "sed -i '/^GSSAPIAuthentication/cGSSAPIAuthentication no' /etc/ssh/sshd_config"
+        ssh -n $ipaddr "sed -i '/^GSSAPICleanupCredentials/cGSSAPICleanupCredentials no' /etc/ssh/sshd_config"
+        ssh -n $ipaddr "sed -i '/^#MaxStartups/cMaxStartups 10000:30:20000' /etc/ssh/sshd_config"
     done
 }
 
@@ -67,9 +87,9 @@ function config_network() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off;";
-        ssh -n $ipaddr "systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld;";
-        ssh -n $ipaddr "systemctl stop postfix; systemctl stop libvirtd; systemctl stop firewalld;";
+        ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off"
+        ssh -n $ipaddr "systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld"
+        ssh -n $ipaddr "systemctl stop postfix; systemctl stop libvirtd; systemctl stop firewalld"
     done
 }
 
