@@ -26,7 +26,7 @@ function set_timezone() {
         # 创建时区软链接
         ssh -n $ipaddr "ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime" || true
         # 如果软链接已经存在，修改它，避免第一步失败
-        ssh -n $ipaddr "ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime" || true
+        ssh -n $ipaddr "ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     done
 }
 
