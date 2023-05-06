@@ -18,13 +18,13 @@ function download_jdk() {
 function install_jdk() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        scp -r /tmp/jdk-8u202-linux-x64.tar.gz $ipaddr:/tmp;
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        scp -r /tmp/jdk-8u202-linux-x64.tar.gz $ipaddr:/tmp
         ssh -n $ipaddr "tar -zxvf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/"
-        scp -r config/jdk_profile  $ipaddr:/tmp/;
-        ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile";
-        ssh -n $ipaddr "cat /tmp/jdk_profile >> /etc/profile";
-        ssh -n $ipaddr "source /etc/profile";
+        scp -r config/jdk_profile  $ipaddr:/tmp/
+        ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile"
+        ssh -n $ipaddr "cat /tmp/jdk_profile >> /etc/profile"
+        ssh -n $ipaddr "source /etc/profile"
         ssh -n $ipaddr "mkdir -p /usr/java; ln -s /opt/jdk1.8.0_202 /usr/java/default" || true
     done
 }
@@ -35,14 +35,12 @@ function config_jars() {
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "mkdir -p /usr/share/java"
-        ssh -n $ipaddr "wget -O /tmp/mysql-connector-java.jar.tar.gz $HTTPD_SERVER/others/mysql-connector-java.jar.tar.gz"
-        ssh -n $ipaddr "tar -zxvf /tmp/mysql-connector-java.jar.tar.gz -C /usr/share/java"
-
+        scp -r libs/mysql-connector-java.jar  $ipaddr:/usr/share/java/
+        
         ssh -n $ipaddr "mkdir -p /usr/share/hive"
-        ssh -n $ipaddr "wget -O /tmp/commons-httpclient-3.1.jar.tar.gz $HTTPD_SERVER/others/commons-httpclient-3.1.jar.tar.gz"
-        ssh -n $ipaddr "wget -O /tmp/elasticsearch-hadoop-6.3.0.jar.tar.gz $HTTPD_SERVER/others/elasticsearch-hadoop-6.3.0.jar.tar.gz"
-        ssh -n $ipaddr "tar -zxvf /tmp/commons-httpclient-3.1.jar.tar.gz -C /usr/share/hive"
-        ssh -n $ipaddr "tar -zxvf /tmp/elasticsearch-hadoop-6.3.0.jar.tar.gz -C /usr/share/hive"
+        scp -r libs/commons-httpclient-3.1.jar  $ipaddr:/usr/share/hive/
+        scp -r libs/elasticsearch-hadoop-6.3.0.jar  $ipaddr:/usr/share/hive/
+        scp -r libs/jaxen-1.2.0.jar  $ipaddr:/usr/share/hive/
     done
 }
 
