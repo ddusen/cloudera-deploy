@@ -101,7 +101,10 @@ function main() {
 
     echo -e "$CSTART>>install_base$CEND"
     install_base
-
+    
+    echo -e "$CSTART>>set_timezone$CEND"
+    set_timezone
+    
     echo -e "$CSTART>>backup_configs$CEND"
     backup_configs
 
@@ -110,6 +113,9 @@ function main() {
 
     echo -e "$CSTART>>disable_selinux$CEND"
     disable_selinux
+
+    echo -e "$CSTART>>disable_swap$CEND"
+    disable_swap
 
     echo -e "$CSTART>>config_ssh$CEND"
     config_ssh
