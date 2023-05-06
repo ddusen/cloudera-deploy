@@ -35,12 +35,12 @@ function backup_configs() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "mkdir -p /opt/backup_sys_configs"
-        ssh -n $ipaddr "cp /etc/security/limits.conf /opt/backup_sys_configs"
-        ssh -n $ipaddr "cp /etc/security/limits.d/20-nproc.conf /opt/backup_sys_configs"
-        ssh -n $ipaddr "cp /etc/sysctl.conf /opt/backup_sys_configs"
-        ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup_sys_configs"
-        ssh -n $ipaddr "cp /etc/fstab /opt/backup_sys_configs"
+        ssh -n $ipaddr "mkdir -p /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
+        ssh -n $ipaddr "cp /etc/security/limits.conf /opt/backup/configs_$(date '+%Y%m%d%H%M%S')/"
+        ssh -n $ipaddr "cp /etc/security/limits.d/20-nproc.conf /opt/backup/configs_$(date '+%Y%m%d%H%M%S')/"
+        ssh -n $ipaddr "cp /etc/sysctl.conf /opt/backup/configs_$(date '+%Y%m%d%H%M%S')/"
+        ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup/configs_$(date '+%Y%m%d%H%M%S')/"
+        ssh -n $ipaddr "cp /etc/fstab /opt/backup/configs_$(date '+%Y%m%d%H%M%S')/"
     done
 }
 
