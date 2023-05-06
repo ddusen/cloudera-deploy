@@ -49,8 +49,8 @@ function disable_hugepage() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "grubby --update-kernel=ALL --args='transparent_hugepage=never'"; 
-        ssh -n $ipaddr "sed -i '/^#RemoveIPC=no/cRemoveIPC=no' /etc/systemd/logind.conf; systemctl restart systemd-logind.service";
+        ssh -n $ipaddr "grubby --update-kernel=ALL --args='transparent_hugepage=never'"
+        ssh -n $ipaddr "sed -i '/^#RemoveIPC=no/cRemoveIPC=no' /etc/systemd/logind.conf; systemctl restart systemd-logind.service"
     done
 }
 
@@ -66,7 +66,10 @@ function disable_selinux() {
 function disable_swap() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        ssh -n $ipaddr "sed -i '/swap / s/^\(.*\)$/#\1/g' test.txt"
+        ssh -n $ipaddr "sed -i '/swap / s/^\(.*\)$/#\1/g' /etc/fstab"
+        ssh -n $ipaddr "sed -i '/swappiness/d' /etc/sysctl.conf"
+        ssh -n $ipaddr "echo 'vm.swappiness=0' >> /etc/sysctl.conf"
+        ssh -n $ipaddr "swapoff -a"
     done
 }
 
