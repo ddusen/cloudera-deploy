@@ -15,6 +15,8 @@ function install_base() {
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp rpms/*.rpm $ipaddr:/tmp/
         ssh -n $ipaddr "rpm -Uvh /tmp/*.rpm" || true
+        
+        ssh -n $ipaddr "rm -rf /etc/yum.repos.d/epel*"
         ssh -n $ipaddr "yum install -y vim wget net-tools" || true
     done
 }
