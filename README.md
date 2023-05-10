@@ -32,7 +32,7 @@ tar -zxvf cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 - [./01_sshpass.sh](./01_sshpass.sh)
 
 ### 2. 配置所有节点的 hosts
-- 需要修改 `config/vm_info` 文件
+- 需要修改 `config/hosts` 文件
 - [./02_hosts.sh](./02_hosts.sh)
 
 ### 3. 初始化系统环境
