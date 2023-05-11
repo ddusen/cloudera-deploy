@@ -1,6 +1,0 @@
-[os]
-name=CentOS-7.9 - os
-baseurl=file:///iso
-enabled=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-gpgcheck=1
