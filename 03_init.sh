@@ -3,7 +3,7 @@
 #author: Sen Du
 #email: dusen@gennlife.com
 #created: 2023-04-16 10:00:00
-#updated: 2023-04-16 10:00:00
+#updated: 2023-05-06 18:00:00
 
 set -e 
 source 00_env
@@ -13,22 +13,16 @@ function install_base() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        scp rpms/*.rpm $ipaddr:/tmp/
-        ssh -n $ipaddr "rpm -Uvh /tmp/*.rpm" || true
+        scp rpms/epel-release-7-14.noarch.rpm $ipaddr:/tmp/
+        scp rpms/htop-2.2.0-3.el7.x86_64.rpm $ipaddr:/tmp/
+        scp rpms/iotop-0.6-4.el7.noarch.rpm $ipaddr:/tmp/
+
+        ssh -n $ipaddr "rpm -Uvh /tmp/epel-release-7-14.noarch.rpm" || true
+        ssh -n $ipaddr "rpm -Uvh /tmp/htop-2.2.0-3.el7.x86_64.rpm" || true
+        ssh -n $ipaddr "rpm -Uvh /tmp/iotop-0.6-4.el7.noarch.rpm" || true
         
         ssh -n $ipaddr "rm -rf /etc/yum.repos.d/epel*"
         ssh -n $ipaddr "yum install -y vim wget net-tools" || true
-    done
-}
-
-# 设置时区为 Asia/Shanghai
-function set_timezone() {
-    cat config/vm_info | while read ipaddr name passwd
-    do
-        # 创建时区软链接
-        ssh -n $ipaddr "ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime" || true
-        # 如果软链接已经存在，修改它，避免第一步失败
-        ssh -n $ipaddr "ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     done
 }
 
@@ -37,12 +31,19 @@ function backup_configs() {
     cat config/vm_info | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "mkdir -p /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
-        ssh -n $ipaddr "cp /etc/security/limits.conf /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
-        ssh -n $ipaddr "cp /etc/security/limits.d/20-nproc.conf /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
-        ssh -n $ipaddr "cp /etc/sysctl.conf /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
-        ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
-        ssh -n $ipaddr "cp /etc/fstab /opt/backup/configs_$(date '+%Y%m%d%H%M%S')"
+        ssh -n $ipaddr "mkdir -p /opt/backup/configs_$(date '+%Y%m%d')"
+    done
+}
+
+# 设置时区为 Asia/Shanghai
+function set_timezone() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        # 创建时区软链接
+        ssh -n $ipaddr "ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime" || true
+        # 如果软链接已经存在，修改它，避免第一步失败
+        ssh -n $ipaddr "ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     done
 }
 
@@ -52,7 +53,8 @@ function disable_hugepage() {
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "grubby --update-kernel=ALL --args='transparent_hugepage=never'"
-        ssh -n $ipaddr "sed -i '/^#RemoveIPC=no/cRemoveIPC=no' /etc/systemd/logind.conf; systemctl restart systemd-logind.service"
+        ssh -n $ipaddr "sed -i '/^#RemoveIPC=no/cRemoveIPC=no' /etc/systemd/logind.conf"
+        ssh -n $ipaddr "systemctl restart systemd-logind.service"
     done
 }
 
@@ -60,26 +62,28 @@ function disable_hugepage() {
 function disable_selinux() {
     cat config/vm_info | while read ipaddr name passwd
     do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "cp /etc/selinux/config /opt/backup/configs_$(date '+%Y%m%d')/etc_selinux_config"
         ssh -n $ipaddr "sed -i '/^SELINUX=/cSELINUX=disabled' /etc/selinux/config"
     done
 }
 
-# 关闭 swap
-function disable_swap() {
+# 配置 limits.conf
+function config_limits() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        ssh -n $ipaddr "sed -i '/swap / s/^\(.*\)$/#\1/g' /etc/fstab"
-        ssh -n $ipaddr "sed -i '/swappiness/d' /etc/sysctl.conf"
-        ssh -n $ipaddr "echo 'vm.swappiness=0' >> /etc/sysctl.conf"
-        ssh -n $ipaddr "swapoff -a"
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "ulimit -Hn 65536"
+        ssh -n $ipaddr "ulimit -n 65536"
     done
 }
 
-# 配置ssh
+# 配置 ssh
 function config_ssh() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup/configs_$(date '+%Y%m%d')/etc_ssh_sshd_config"
         ssh -n $ipaddr "sed -i '/^#UseDNS/cUseDNS no' /etc/ssh/sshd_config"
         ssh -n $ipaddr "sed -i '/^GSSAPIAuthentication/cGSSAPIAuthentication no' /etc/ssh/sshd_config"
         ssh -n $ipaddr "sed -i '/^GSSAPICleanupCredentials/cGSSAPICleanupCredentials no' /etc/ssh/sshd_config"
@@ -92,38 +96,54 @@ function config_network() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off"
-        ssh -n $ipaddr "systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld"
-        ssh -n $ipaddr "systemctl stop postfix; systemctl stop libvirtd; systemctl stop firewalld"
+        ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off" || true
+        ssh -n $ipaddr "systemctl disable postfix; systemctl disable libvirtd; systemctl disable firewalld" || true
+        ssh -n $ipaddr "systemctl stop postfix; systemctl stop libvirtd; systemctl stop firewalld" || true
+    done
+}
+
+# 关闭 swap
+function disable_swap() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "cp /etc/fstab /opt/backup/configs_$(date '+%Y%m%d')"
+        ssh -n $ipaddr "sed -i '/swap / s/^\(.*\)$/#\1/g' /etc/fstab"
+        ssh -n $ipaddr "sed -i '/swappiness/d' /etc/sysctl.conf"
+        ssh -n $ipaddr "echo 'vm.swappiness=0' >> /etc/sysctl.conf"
+        ssh -n $ipaddr "swapoff -a"
     done
 }
 
 function main() {
     echo -e "$CSTART>03_init.sh$CEND"
-
+    
     echo -e "$CSTART>>install_base$CEND"
     install_base
-    
-    echo -e "$CSTART>>set_timezone$CEND"
-    set_timezone
-    
+
     echo -e "$CSTART>>backup_configs$CEND"
     backup_configs
 
-    echo -e "$CSTART>>stop_hugepage$CEND"
+    echo -e "$CSTART>>set_timezone$CEND"
+    set_timezone
+
+    echo -e "$CSTART>>disable_hugepage$CEND"
     disable_hugepage
 
     echo -e "$CSTART>>disable_selinux$CEND"
     disable_selinux
 
-    echo -e "$CSTART>>disable_swap$CEND"
-    disable_swap
+    echo -e "$CSTART>>config_limits$CEND"
+    config_limits
 
     echo -e "$CSTART>>config_ssh$CEND"
     config_ssh
 
     echo -e "$CSTART>>config_network$CEND"
-    config_network || true # 忽略报错
+    config_network
+
+    echo -e "$CSTART>>disable_swap$CEND"
+    disable_swap
 }
 
 main
