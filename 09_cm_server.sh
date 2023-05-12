@@ -27,7 +27,7 @@ function config_parcel_repo() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     parcel_dir="/opt/cloudera/parcel-repo"
     mkdir -p $parcel_dir
-    wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel
+    wget -nc -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel || true
     wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha
     wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha1 $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.sha1
     wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel.torrent
