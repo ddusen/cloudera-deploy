@@ -54,6 +54,7 @@ function clean_cloudera() {
         ssh -n $ipaddr "rm -rf /etc/cloudera*"
         ssh -n $ipaddr "rm -rf /var/lib/cloudera*"
         ssh -n $ipaddr "rm -rf /var/log/cloudera*"
+        ssh -n $ipaddr "rm -rf $DATA_ROOT"
         ssh -n $ipaddr "systemctl daemon-reload"
     done
 }
