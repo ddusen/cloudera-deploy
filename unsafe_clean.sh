@@ -59,6 +59,16 @@ function clean_cloudera() {
     done
 }
 
+# 清理数据
+function clean_data() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND";
+        ssh -n $ipaddr "rm -rf $DATA_ROOT"
+        ssh -n $ipaddr "rm -rf /tmp/*"
+    done
+}
+
 function main() {
     echo -e "$CSTART>unsafe_clean.sh$CEND"
 
@@ -73,6 +83,9 @@ function main() {
 
     echo -e "$CSTART>>clean_cloudera$CEND"
     clean_cloudera || true
+
+    echo -e "$CSTART>>clean_data$CEND"
+    clean_data || true
 }
 
 main
