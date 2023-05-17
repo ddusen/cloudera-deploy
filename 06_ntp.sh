@@ -59,6 +59,18 @@ function restart_ntp() {
     done
 }
 
+# 强制刷新 ntp，使用 crontab
+function force_refresh_ntp() {
+    cat config/vm_info | while read ipaddr name passwd
+    do
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "mkdir -p /root/scripts/"
+        scp config/ntp_sync.sh $ipaddr:/root/scripts/
+        ssh -n $ipaddr "chmod +x /root/scripts/ntp_sync.sh"
+        ssh -n $ipaddr "(crontab -u $(whoami) -l; echo '*/15 * * * *  /bin/bash /root/scripts/ntp_sync.sh' ) | crontab -u $(whoami) -"
+    done
+}
+
 function main() {
     echo -e "$CSTART>06_ntp.sh$CEND"
 
@@ -79,6 +91,9 @@ function main() {
 
     echo -e "$CSTART>>restart_ntp$CEND"
     restart_ntp
+
+    #echo -e "$CSTART>>force_refresh_ntp$CEND"
+    #force_refresh_ntp
 }
 
 main
