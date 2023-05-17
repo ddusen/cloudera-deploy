@@ -12,7 +12,7 @@ source 00_env
 function backup_ntp_config() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
+        echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak" || true
     done
 }
@@ -21,8 +21,8 @@ function backup_ntp_config() {
 function remove_old_ntp() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "yum remove -y chrony ntp";
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "yum remove -y chrony ntp"
     done
 }
 
@@ -30,8 +30,14 @@ function remove_old_ntp() {
 function install_ntp() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "yum install -y ntp";
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        scp rpms/autogen-libopts-5.18-5.el7.x86_64.rpm $ipaddr:/tmp/
+        scp rpms/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
+        scp rpms/ntpdate-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
+
+        ssh -n $ipaddr "rpm -Uvh /tmp/autogen-libopts-5.18-5.el7.x86_64.rpm" || true
+        ssh -n $ipaddr "rpm -Uvh /tmp/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm" || true
+        ssh -n $ipaddr "rpm -Uvh /tmp/ntpdate-4.2.6p5-29.el7.centos.2.x86_64.rpm" || true
     done
 }
 
@@ -39,8 +45,8 @@ function install_ntp() {
 function config_ntp_clients() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        scp config/ntp_clients $ipaddr:/etc/ntp.conf;
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        scp config/ntp_clients $ipaddr:/etc/ntp.conf
     done
 }
 
@@ -54,8 +60,8 @@ function config_ntp_server() {
 function restart_ntp() {
     cat config/vm_info | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND";
-        ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; chkconfig ntpd on; timedatectl set-ntp true";
+        echo -e "$CSTART>>>>$ipaddr$CEND"
+        ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; chkconfig ntpd on; timedatectl set-ntp true"
     done
 }
 
