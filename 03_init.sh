@@ -128,7 +128,7 @@ function main() {
     set_timezone
 
     echo -e "$CSTART>>disable_hugepage$CEND"
-    disable_hugepage
+    disable_hugepage || true
 
     echo -e "$CSTART>>disable_selinux$CEND"
     disable_selinux

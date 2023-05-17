@@ -19,7 +19,7 @@ function install_jdk() {
     cat config/vm_info | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        rsync -a --ignore-existing /tmp/jdk-8u202-linux-x64.tar.gz $ipaddr:/tmp
+        rsync -avzP --ignore-existing /tmp/jdk-8u202-linux-x64.tar.gz $ipaddr:/tmp
         ssh -n $ipaddr "tar -zxvf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/"
         scp -r config/jdk_profile  $ipaddr:/tmp/
         ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile"
