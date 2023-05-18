@@ -41,6 +41,7 @@ function clean_mysql() {
     rm -rf /etc/my.cnf
     rm -rf /var/log/mysql*
     rm -rf /root/.mysql_secret
+    rm -rf /root/.mysql_history
 }
 
 # 清理所有服务器上的 cloudera 服务

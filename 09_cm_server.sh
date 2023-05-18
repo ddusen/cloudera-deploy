@@ -38,12 +38,6 @@ function config_parcel_repo() {
     chmod -R ugo+rX $parcel_dir
 }
 
-# 预处理数据库
-function prepare_database() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    /bin/bash ./scm_prepare_database.sh mysql -h$CCC -uroot -p$MYSQL_ROOT_PASSWD scm
-}
-
 # 重启 cloudera manager server
 function restart_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
@@ -63,9 +57,6 @@ function main() {
 
     echo -e "$CSTART>>config_parcel_repo$CEND"
     config_parcel_repo
-
-    echo -e "$CSTART>>init_database$CEND"
-    init_database
 
     echo -e "$CSTART>>restart_server$CEND"
     restart_server
