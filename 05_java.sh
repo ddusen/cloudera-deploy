@@ -11,7 +11,7 @@ source 00_env
 # 从httpd私有软件库，下载 jdk
 function download_jdk() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    wget -nc -O /tmp/jdk-8u202-linux-x64.tar.gz $HTTPD_SERVER/others/jdk-8u202-linux-x64.tar.gz || true
+    wget -O /tmp/jdk-8u202-linux-x64.tar.gz $HTTPD_SERVER/others/jdk-8u202-linux-x64.tar.gz || true
 }
 
 # 安装 jdk 到所有节点
