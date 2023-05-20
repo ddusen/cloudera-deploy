@@ -13,8 +13,8 @@ function install_base() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     cp rpms/libaio-0.3.109-13.el7.x86_64.rpm /tmp/
     cp rpms/libaio-devel-0.3.109-13.el7.x86_64.rpm /tmp/
-    rpm -Uvh /tmp/libaio-0.3.109-13.el7.x86_64.rpm
-    rpm -Uvh /tmp/libaio-devel-0.3.109-13.el7.x86_64.rpm
+    rpm -Uvh /tmp/libaio-0.3.109-13.el7.x86_64.rpm || true
+    rpm -Uvh /tmp/libaio-devel-0.3.109-13.el7.x86_64.rpm || true
 }
 
 # 从httpd私有软件库，下载 mysql5.6
