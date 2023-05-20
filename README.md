@@ -21,6 +21,7 @@ wget -O /opt/cloudera-parcels.6.3.1.20230420.tar.gz http://119.254.145.21:12225/
 
 2. 把压缩包解压到 /var/www/html 目录下
 ```bash
+mkdir -p /var/www/html
 tar -zxvf /opt/cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 ```
 
