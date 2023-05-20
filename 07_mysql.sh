@@ -8,6 +8,15 @@
 set -e 
 source 00_env
 
+# 安装 mysql 依赖
+function install_base() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    cp rpms/libaio-0.3.109-13.el7.x86_64.rpm /tmp/
+    cp rpms/libaio-devel-0.3.109-13.el7.x86_64.rpm /tmp/
+    rpm -Uvh /tmp/libaio-0.3.109-13.el7.x86_64.rpm
+    rpm -Uvh /tmp/libaio-devel-0.3.109-13.el7.x86_64.rpm
+}
+
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
@@ -51,6 +60,9 @@ function update_database() {
 
 function main() {
     echo -e "$CSTART>07_mysql.sh$CEND"
+
+    echo -e "$CSTART>>install_base$CEND"
+    install_base
 
     echo -e "$CSTART>>download_mysql$CEND"
     download_mysql
