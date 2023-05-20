@@ -32,12 +32,12 @@ function install_ntp() {
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp rpms/autogen-libopts-5.18-5.el7.x86_64.rpm $ipaddr:/tmp/
-        scp rpms/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
         scp rpms/ntpdate-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
+        scp rpms/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
 
         ssh -n $ipaddr "rpm -Uvh /tmp/autogen-libopts-5.18-5.el7.x86_64.rpm" || true
-        ssh -n $ipaddr "rpm -Uvh /tmp/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm" || true
         ssh -n $ipaddr "rpm -Uvh /tmp/ntpdate-4.2.6p5-29.el7.centos.2.x86_64.rpm" || true
+        ssh -n $ipaddr "rpm -Uvh /tmp/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm" || true
     done
 }
 
