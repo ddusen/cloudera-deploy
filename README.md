@@ -15,10 +15,13 @@
 1. 从公司云盘下载软件包 cloudera-parcels.6.3.1.20230420.tar.gz 到脚本执行机器中。
 - http://119.254.145.21:12225/owncloud/index.php/s/wR6tBJApQoCu8qH
 - 如果网盘链接失效，去网盘目录下找该包：03-大数据/01-CDH/cloudera-parcels.6.3.1.20230420.tar.gz
+```bash
+wget -O /opt/cloudera-parcels.6.3.1.20230420.tar.gz http://119.254.145.21:12225/owncloud/index.php/s/wR6tBJApQoCu8qH/download
+```
 
 2. 把压缩包解压到 /var/www/html 目录下
 ```bash
-tar -zxvf cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
+tar -zxvf /opt/cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 ```
 
 ## 一、CM 安装
@@ -45,7 +48,7 @@ tar -zxvf cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 - [./05_java.sh](./05_java.sh)
 
 ### 6. 安装 ntp
-- 需要修改 `config/ntp_clients` 中的 ntp server ip `10.0.1.101`
+- 需要修改 `config/ntp_clients` 中的 ntp server ip `10.0.2.63`
 - [./06_ntp.sh](./06_ntp.sh)
 
 ### 7. 安装 mysql
