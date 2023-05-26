@@ -10,7 +10,7 @@ source 00_env
 
 # 安装 cloudera manager agent 依赖
 function install_dependent() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "yum install -y perl perl-devel bind-utils psmisc cyrus-sasl-plain cyrus-sasl-gssapi fuse portmap fuse-libs /lib/lsb/init-functions httpd mod_ssl openssl-devel python-psycopg2 MySQL-python libxslt || true";
@@ -19,7 +19,7 @@ function install_dependent() {
 
 # 安装 cloudera manager agent
 function install_agent() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm || true";
@@ -29,7 +29,7 @@ function install_agent() {
 
 # 配置 cloudera manager agent
 function config_agent() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "cp /etc/cloudera-scm-agent/config.ini /etc/cloudera-scm-agent/config.ini.bak" || true
@@ -41,7 +41,7 @@ function config_agent() {
 
 # 重启 cloudera manager agent
 function restart_agent() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "systemctl restart cloudera-scm-agent; systemctl enable cloudera-scm-agent; chkconfig cloudera-scm-agent on"

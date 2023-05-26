@@ -21,7 +21,7 @@ function identification() {
 
 # 清理 java 服务
 function clean_java() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "sed -i '/JAVA_HOME/d' /etc/profile"
@@ -46,7 +46,7 @@ function clean_mysql() {
 
 # 清理所有服务器上的 cloudera 服务
 function clean_cloudera() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "systemctl stop cloudera*"
@@ -62,7 +62,7 @@ function clean_cloudera() {
 
 # 清理数据
 function clean_data() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "rm -rf $DATA_ROOT"

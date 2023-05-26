@@ -14,13 +14,13 @@ export FILENAME='cloudera-parcels.6.3.1.20230420.tar.gz'
 export ISO='iso.tar.gz'
 
 ## 中控机 IP
-export CCC='10.0.1.101'
+export CCC='10.0.2.63'
 
 ## httpd server address
-export HTTPD_SERVER='http://10.0.1.101/cloudera-parcels'
+export HTTPD_SERVER='http://10.0.2.63/cloudera-parcels'
 
 ## MySQL
 export MYSQL_ROOT_PASSWD='@GennLife2015'
 
 ## DataNode默认数据根目录
-export DATA_ROOT='/dfs'
+export DATA_ROOT='/data'

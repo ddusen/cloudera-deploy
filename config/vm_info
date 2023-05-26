@@ -1,5 +1,8 @@
-10.32.20.219 cdh-node-01 @Dev1111
-10.32.20.229 cdh-node-02 @Dev1111
-10.32.20.238 cdh-node-03 @Dev1111
-10.32.20.239 cdh-node-04 @Dev1111
-10.32.20.218 cdh-cm-01 @Dev1111
+#IPAddr Hostname Passwd
+10.0.2.65 cdh-master-01 @Dev1111
+10.0.2.68 cdh-master-02 @Dev1111
+10.0.2.69 cdh-master-03 @Dev1111
+10.0.2.70 cdh-data-01 @Dev1111
+10.0.2.71 cdh-data-02 @Dev1111
+10.0.2.72 cdh-data-03 @Dev1111
+10.0.2.63 cdh-cm-01 @Dev1111

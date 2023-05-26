@@ -19,7 +19,7 @@ function install_sshpass() {
 
 # 配置免密
 function config_sshpass() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr

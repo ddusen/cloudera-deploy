@@ -10,7 +10,7 @@ source 00_env
 
 # 安装一些基础软件，便于后续操作
 function install_base() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp rpms/epel-release-7-14.noarch.rpm $ipaddr:/tmp/
@@ -28,7 +28,7 @@ function install_base() {
 
 # 备份一些配置文件
 function backup_configs() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "mkdir -p /opt/backup/configs_$(date '+%Y%m%d')"
@@ -37,7 +37,7 @@ function backup_configs() {
 
 # 设置时区为 Asia/Shanghai
 function set_timezone() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         # 创建时区软链接
@@ -49,7 +49,7 @@ function set_timezone() {
 
 # 禁用 hugepage
 function disable_hugepage() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "grubby --update-kernel=ALL --args='transparent_hugepage=never'"
@@ -60,7 +60,7 @@ function disable_hugepage() {
 
 # 关闭 selinux
 function disable_selinux() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "cp /etc/selinux/config /opt/backup/configs_$(date '+%Y%m%d')/etc_selinux_config"
@@ -71,7 +71,7 @@ function disable_selinux() {
 
 # 配置 limits.conf
 function config_limits() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "ulimit -Hn 65536"
@@ -81,7 +81,7 @@ function config_limits() {
 
 # 配置 ssh
 function config_ssh() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "cp /etc/ssh/sshd_config /opt/backup/configs_$(date '+%Y%m%d')/etc_ssh_sshd_config"
@@ -94,7 +94,7 @@ function config_ssh() {
 
 # 配置网络策略
 function config_network() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "chkconfig iptables off; chkconfig ip6tables off; chkconfig postfix off" || true
@@ -105,7 +105,7 @@ function config_network() {
 
 # 关闭 swap
 function disable_swap() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "cp /etc/fstab /opt/backup/configs_$(date '+%Y%m%d')"

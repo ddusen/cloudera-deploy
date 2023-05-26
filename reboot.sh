@@ -21,7 +21,7 @@ function identification() {
 
 # 重启机器
 function reboot() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND";
         ssh -n $ipaddr "reboot" || true;

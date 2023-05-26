@@ -10,7 +10,7 @@ source 00_env
 
 # 备份 ntp config
 function backup_ntp_config() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak" || true
@@ -19,7 +19,7 @@ function backup_ntp_config() {
 
 # 移除旧版本 ntp
 function remove_old_ntp() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "yum remove -y chrony ntp"
@@ -28,7 +28,7 @@ function remove_old_ntp() {
 
 # 安装 ntp
 function install_ntp() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp rpms/autogen-libopts-5.18-5.el7.x86_64.rpm $ipaddr:/tmp/
@@ -43,7 +43,7 @@ function install_ntp() {
 
 # 配置 ntp clients
 function config_ntp_clients() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp config/ntp_clients $ipaddr:/etc/ntp.conf
@@ -58,7 +58,7 @@ function config_ntp_server() {
 
 # 重启 ntp 服务
 function restart_ntp() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; chkconfig ntpd on; timedatectl set-ntp true"
@@ -67,7 +67,7 @@ function restart_ntp() {
 
 # 强制刷新 ntp，使用 crontab
 function force_refresh_ntp() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "mkdir -p /root/scripts/"

@@ -10,7 +10,7 @@ source 00_env
 
 # 配置所有节点的 hosts
 function config_hosts() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do 
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp config/hosts $ipaddr:/etc/
@@ -19,7 +19,7 @@ function config_hosts() {
 
 # 配置所有节点的 hostname
 function config_hostname() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "echo 'hostname=$name' > /etc/sysconfig/network"

@@ -16,7 +16,7 @@ function download_jdk() {
 
 # 安装 jdk 到所有节点
 function install_jdk() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp /tmp/jdk-8u202-linux-x64.tar.gz $ipaddr:/tmp
@@ -31,7 +31,7 @@ function install_jdk() {
 
 # 配置一些插件 jars
 function config_jars() {
-    cat config/vm_info | while read ipaddr name passwd
+    cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         ssh -n $ipaddr "mkdir -p /usr/share/java"
