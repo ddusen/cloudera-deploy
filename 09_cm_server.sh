@@ -19,6 +19,7 @@ function config_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak
     cp config/cm_server /etc/cloudera-scm-server/db.properties
+    sed -i 's/TODO_SERVER_IP/$LocalIp/g' /etc/cloudera-scm-server/db.properties
     chmod 644 /etc/cloudera-scm-server/db.properties
 }
 

@@ -47,6 +47,7 @@ function config_ntp_clients() {
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
         scp config/ntp_clients $ipaddr:/etc/ntp.conf
+        ssh -n $ipaddr "sed -i 's/TODO_SERVER_IP/$LocalIp/g' /etc/ntp.conf"
     done
 }
 
@@ -54,6 +55,7 @@ function config_ntp_clients() {
 function config_ntp_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     cp config/ntp_server /etc/ntp.conf
+    sed -i "s/TODO_SERVER_IP/$(echo $LocalIp | awk -F. '{OFS="."; $NF=0; print}')/g" /etc/ntp.conf
 }
 
 # 重启 ntp 服务

@@ -7,9 +7,9 @@ restrict -6 default ignore
 restrict 127.0.0.1
 restrict -6 ::1
 #使用指定的时间服务器
-server 10.0.2.63
+server TODO_SERVER_IP
 #允许指定的时间服务器查询本时间服务器的信息
-restrict 10.0.2.63 nomodify notrap nopeer noquery
+restrict TODO_SERVER_IP nomodify notrap nopeer noquery
 #其它认证信息
 includefile /etc/ntp/crypto/pw
 keys /etc/ntp/keys
