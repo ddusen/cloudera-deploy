@@ -17,7 +17,8 @@ function install_server() {
 # 配置 cloudera manager server
 function config_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak
+    mkdir -p /etc/cloudera-scm-server
+    cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak || true
     cp config/cm_server /etc/cloudera-scm-server/db.properties
     sed -i 's/TODO_SERVER_IP/$LocalIp/g' /etc/cloudera-scm-server/db.properties
     chmod 644 /etc/cloudera-scm-server/db.properties
