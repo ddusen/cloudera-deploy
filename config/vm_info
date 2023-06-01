@@ -1,8 +1,8 @@
 #IPAddr Hostname Passwd
-10.0.2.65 cdh-master-01 @Dev1111
-10.0.2.68 cdh-master-02 @Dev1111
-10.0.2.69 cdh-master-03 @Dev1111
-10.0.2.70 cdh-data-01 @Dev1111
-10.0.2.71 cdh-data-02 @Dev1111
-10.0.2.72 cdh-data-03 @Dev1111
-10.0.2.63 cdh-cm-01 @Dev1111
+10.0.5.228 cdh-master-01 @Public2015
+10.0.5.229 cdh-master-02 @Public2015
+10.0.5.232 cdh-master-03 @Public2015
+10.0.5.233 cdh-data-01 @Public2015
+10.0.5.237 cdh-data-02 @Public2015
+10.0.5.238 cdh-data-03 @Public2015
+10.0.5.224 cdh-cm-01 @Public2015
