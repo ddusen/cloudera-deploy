@@ -1,13 +1,14 @@
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
-10.0.2.63 cdh-cm-01
-10.0.2.65 cdh-master-01 hadoop-namenode-01
-10.0.2.68 cdh-master-02 hadoop-namenode-02
-10.0.2.69 cdh-master-03
-10.0.2.70 cdh-data-01
-10.0.2.71 cdh-data-02
-10.0.2.72 cdh-data-03
+10.0.5.224 cdh-cm-01
+
+10.0.5.228 cdh-master-01 hadoop-namenode-01
+10.0.5.229 cdh-master-02 hadoop-namenode-02
+10.0.5.232 cdh-master-03
+10.0.5.233 cdh-data-01
+10.0.5.237 cdh-data-02
+10.0.5.238 cdh-data-03
 
 # haproxy 的 VIP 地址
 #10.32.20.242 hiveserver2-ha
