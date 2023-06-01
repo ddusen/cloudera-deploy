@@ -8,6 +8,12 @@
 set -e 
 source 00_env
 
+# 移除旧版本的 cm server
+function remove_old_server() {
+    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    yum remove -y cloudera-manager-server*
+}
+
 # 安装 cloudera manager server
 function install_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
@@ -50,6 +56,9 @@ function restart_server() {
 
 function main() {
     echo -e "$CSTART>09_cm_server.sh$CEND"
+
+    echo -e "$CSTART>>remove_old_server$CEND"
+    remove_old_server || true # 忽略报错
 
     echo -e "$CSTART>>install_server$CEND"
     install_server || true # 忽略报错
