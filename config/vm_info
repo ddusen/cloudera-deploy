@@ -1,8 +1,6 @@
 #IPAddr Hostname Passwd
-10.0.5.228 cdh-master-01 @Public2015
-10.0.5.229 cdh-master-02 @Public2015
-10.0.5.232 cdh-master-03 @Public2015
-10.0.5.233 cdh-data-01 @Public2015
-10.0.5.237 cdh-data-02 @Public2015
-10.0.5.238 cdh-data-03 @Public2015
-10.0.5.224 cdh-cm-01 @Public2015
+200.200.13.2  cdhmysql unknown
+200.200.13.11 cdhmaster unknown
+200.200.13.12 cdhnode01 unknown
+200.200.13.13 cdhnode02 unknown
+200.200.13.14 cdhnode03 unknown

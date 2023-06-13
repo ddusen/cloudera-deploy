@@ -9,7 +9,7 @@ com.cloudera.cmf.db.type=mysql
 
 # The database host
 # If a non standard port is needed, use 'hostname:port'
-com.cloudera.cmf.db.host=TODO_SERVER_IP
+com.cloudera.cmf.db.host=TODO_MYSQL_HOST
 
 # The database name
 com.cloudera.cmf.db.name=scm
