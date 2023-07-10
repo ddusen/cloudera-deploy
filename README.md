@@ -49,18 +49,15 @@ tar -zxvf /opt/cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 - [./05_java.sh](./05_java.sh)
 
 ### 6. 安装 ntp
-- 需要修改 `config/ntp_clients` 中的 ntp server ip `10.0.2.63`
 - [./06_ntp.sh](./06_ntp.sh)
 
 ### 7. 安装 mysql
 - [./07_mysql.sh](./07_mysql.sh)
 
 ### 8. 安装 cloudera manager agent
-- 需要 `config/cm_agent` 中的 `server_host` 变量
 - [./08_cm_agent.sh](./08_cm_agent.sh)
 
 ### 9. 安装 cloudera manager server
-- 需要 `config/cm_server` 中的 `*.host` 变量
 - [./09_cm_server.sh](./09_cm_server.sh)
 
 *****
