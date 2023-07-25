@@ -11,20 +11,16 @@ source 00_env
 # 安装sshpass
 function install_sshpass() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    # yum install -y sshpass
-    # 离线安装
     rpm -Uvh rpms/epel-release-7-14.noarch.rpm || true
     rpm -Uvh rpms/sshpass-1.06-2.el7.x86_64.rpm || true
 }
 
 # 配置免密
 function config_sshpass() {
-    #SSH 在复制公钥时不进行主机密钥检查
-    export SSH_OPTIONS="-o StrictHostKeyChecking=no"
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
         echo -e "$CSTART>>>>$ipaddr$CEND"
-        sshpass -p $passwd ssh-copy-id $ipaddr
+        sshpass -p $passwd ssh-copy-id -o StrictHostKeyChecking=no $ipaddr
     done
 }
 
