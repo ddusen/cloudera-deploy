@@ -51,8 +51,8 @@ function config_parcel_repo() {
 # 重启 cloudera manager server
 function restart_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    systemctl restart cloudera-scm-server; 
-    systemctl enable cloudera-scm-server;
+    systemctl restart cloudera-scm-server 
+    systemctl enable cloudera-scm-server
     chkconfig cloudera-scm-server on
 }
 

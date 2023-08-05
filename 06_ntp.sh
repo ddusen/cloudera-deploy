@@ -12,7 +12,7 @@ source 00_env
 function backup_ntp_config() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         ssh -n $ipaddr "cp /etc/ntp.conf /etc/ntp.conf.bak" || true
     done
 }
@@ -21,7 +21,7 @@ function backup_ntp_config() {
 function remove_old_ntp() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         ssh -n $ipaddr "yum remove -y chrony ntp"
     done
 }
@@ -30,7 +30,7 @@ function remove_old_ntp() {
 function install_ntp() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         scp rpms/autogen-libopts-5.18-5.el7.x86_64.rpm $ipaddr:/tmp/
         scp rpms/ntpdate-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
         scp rpms/ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm $ipaddr:/tmp/
@@ -45,7 +45,7 @@ function install_ntp() {
 function config_ntp_clients() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         scp config/ntp_clients $ipaddr:/etc/ntp.conf
         ssh -n $ipaddr "sed -i 's/TODO_SERVER_IP/$LocalIp/g' /etc/ntp.conf"
     done
@@ -62,7 +62,7 @@ function config_ntp_server() {
 function restart_ntp() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         ssh -n $ipaddr "systemctl restart ntpd; systemctl enable ntpd; chkconfig ntpd on; timedatectl set-ntp true"
     done
 }
@@ -71,7 +71,7 @@ function restart_ntp() {
 function force_refresh_ntp() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         ssh -n $ipaddr "mkdir -p /root/scripts/"
         scp config/ntp_sync.sh $ipaddr:/root/scripts/
         ssh -n $ipaddr "chmod +x /root/scripts/ntp_sync.sh"

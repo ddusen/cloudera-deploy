@@ -18,7 +18,7 @@ function download_jdk() {
 function install_jdk() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         scp /tmp/jdk-8u202-linux-x64.tar.gz $ipaddr:/tmp
         ssh -n $ipaddr "tar -zxvf /tmp/jdk-8u202-linux-x64.tar.gz -C /opt/"
         scp -r config/jdk_profile  $ipaddr:/tmp/
@@ -33,7 +33,7 @@ function install_jdk() {
 function config_jars() {
     cat config/vm_info | grep -v "^#" | grep -v "^$" | while read ipaddr name passwd
     do
-        echo -e "$CSTART>>>>$ipaddr$CEND"
+        echo -e "$CSTART>>>>$ipaddr [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
         ssh -n $ipaddr "mkdir -p /usr/share/java"
         scp -r libs/mysql-connector-java.jar  $ipaddr:/usr/share/java/
         
