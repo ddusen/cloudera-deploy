@@ -127,3 +127,7 @@ tar -zxvf /opt/cloudera-parcels.6.3.1.20230420.tar.gz -C /var/www/html/
 
 10 directories, 33 files
 ```
+
+## 四、Refs
+
+1. sentry 权限组件安装：http://con.ins.gennlife.cn/pages/viewpage.action?pageId=76518866
