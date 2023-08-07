@@ -11,14 +11,13 @@ source 00_env
 # 移除旧版本的 cm server
 function remove_old_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
-    yum remove -y cloudera-manager* || true
+    yum remove -y cloudera-manager-server || true
 }
 
 # 安装 cloudera manager server
 function install_server() {
     echo -e "$CSTART>>>>$(hostname -I)$CEND"
     rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm || true
-    rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm || true
     rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true
 }
 
