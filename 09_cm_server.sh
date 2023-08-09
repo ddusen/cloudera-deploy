@@ -10,20 +10,20 @@ source 00_env
 
 # 移除旧版本的 cm server
 function remove_old_server() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     yum remove -y cloudera-manager-server || true
 }
 
 # 安装 cloudera manager server
 function install_server() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm || true
     rpm -ivh $HTTPD_SERVER/cm6/6.3.1/cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm || true
 }
 
 # 配置 cloudera manager server
 function config_server() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     mkdir -p /etc/cloudera-scm-server
     cp /etc/cloudera-scm-server/db.properties /etc/cloudera-scm-server/db.properties.bak || true
     cp config/cm_server /etc/cloudera-scm-server/db.properties
@@ -33,7 +33,7 @@ function config_server() {
 
 # 配置 本地存储库
 function config_parcel_repo() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     parcel_dir="/opt/cloudera/parcel-repo"
     mkdir -p $parcel_dir
     wget -O $parcel_dir/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel $HTTPD_SERVER/cdh6/6.3.2/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554-el7.parcel || true
@@ -49,7 +49,7 @@ function config_parcel_repo() {
 
 # 重启 cloudera manager server
 function restart_server() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     systemctl restart cloudera-scm-server 
     systemctl enable cloudera-scm-server
     chkconfig cloudera-scm-server on

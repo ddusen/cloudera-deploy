@@ -53,7 +53,7 @@ function config_ntp_clients() {
 
 # 配置 ntp server
 function config_ntp_server() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     cp config/ntp_server /etc/ntp.conf
     sed -i "s/TODO_SERVER_IP/$(echo $LocalIp | awk -F. '{OFS="."; $NF=0; print}')/g" /etc/ntp.conf
 }

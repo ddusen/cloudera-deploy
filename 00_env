@@ -13,13 +13,13 @@ export CEND='\033[0m'
 export FILENAME='cloudera-parcels.6.3.1.20230420.tar.gz'
 
 ## 中控机 IP：作为 cm、ntp 的服务端
-export LocalIp='200.200.13.11'
+export LocalIp='10.0.2.178'
 
 ## httpd server address
-export HTTPD_SERVER='http://200.200.13.11/cloudera-parcels'
+export HTTPD_SERVER='http://10.0.2.178/cloudera-parcels'
 
 ## MySQL
-export MYSQL_HOST='200.200.13.2'
+export MYSQL_HOST='10.0.2.178'
 export MYSQL_ROOT_PASSWD='@GennLife2015'
 
 ## DataNode默认数据根目录

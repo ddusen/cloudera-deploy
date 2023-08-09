@@ -10,13 +10,13 @@ source 00_env
 
 # 生成公钥私钥
 function generate_key() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     echo n | ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N "" || true
 }
 
 # 安装sshpass
 function install_sshpass() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     rpm -Uvh rpms/epel-release-7-14.noarch.rpm || true
     rpm -Uvh rpms/sshpass-1.06-2.el7.x86_64.rpm || true
 }

@@ -10,7 +10,7 @@ source 00_env
 
 # 安装 mysql 依赖
 function install_base() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     cp rpms/libaio-0.3.109-13.el7.x86_64.rpm /tmp/
     cp rpms/libaio-devel-0.3.109-13.el7.x86_64.rpm /tmp/
     rpm -Uvh /tmp/libaio-0.3.109-13.el7.x86_64.rpm || true
@@ -19,13 +19,13 @@ function install_base() {
 
 # 从httpd私有软件库，下载 mysql5.6
 function download_mysql() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     wget -O /tmp/mysql5.6.tar.gz $HTTPD_SERVER/others/mysql5.6.tar.gz
 }
 
 # 安装 mysql5.6
 function install_mysql() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     yum remove -y mariadb*
     yum install -y perl-Data-Dumper
 
@@ -36,14 +36,14 @@ function install_mysql() {
 
 # 配置 mysql5.6
 function config_mysql() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     cp /etc/my.cnf /etc/my.cnf.bak || true # 忽略报错
     cp config/my.cnf /etc/my.cnf;
 }
 
 # 重启 mysql
 function restart_mysql() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     systemctl restart mysql;
     systemctl enable mysql;
     chkconfig mysql on
@@ -51,7 +51,7 @@ function restart_mysql() {
 
 # 更新数据库，在 mysql 中创建用户，添加新用户和数据库
 function update_database() {
-    echo -e "$CSTART>>>>$(hostname -I)$CEND"
+    echo -e "$CSTART>>>>$(hostname -I) [$(date +'%Y-%m-%d %H:%M:%S')]$CEND"
     default_passwd=$(cat /root/.mysql_secret |grep password|awk '{print $18}')
     mysql -uroot -p"${default_passwd}" --connect-expired-password -e "SET PASSWORD = PASSWORD('$MYSQL_ROOT_PASSWD');"
     sed -i "s/$default_passwd/$MYSQL_ROOT_PASSWD/" /root/.mysql_secret
