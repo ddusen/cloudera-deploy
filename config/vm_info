@@ -1,6 +1,7 @@
 #IPAddr Hostname Passwd
-10.0.2.178 cdh-178 @Dev1111
-10.0.2.179 cdh-179 @Dev1111
-10.0.2.185 cdh-185 @Dev1111   
-10.0.2.186 cdh-186 @Dev1111
-10.0.2.194 cdh-194 @Dev1111
+200.200.13.2 cdhmysql @Passwd1111
+200.200.13.11 cdhmaster @Passwd1111
+200.200.13.12 cdhnode01 @Passwd1111
+200.200.13.13 cdhnode02 @Passwd1111
+200.200.13.14 cdhnode03 @Passwd1111
+200.200.221.12 cdhnode04 @Passwd1111

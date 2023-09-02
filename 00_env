@@ -1,5 +1,5 @@
 #author: Sen Du
-#email: dusen@gennlife.com
+#email: dusen.me@gmail.com
 #created: 2023-04-16 19:00:00
 #updated: 2023-04-16 19:00:00
 
@@ -13,14 +13,14 @@ export CEND='\033[0m'
 export FILENAME='cloudera-parcels.6.3.1.20230420.tar.gz'
 
 ## 中控机 IP：作为 cm、ntp 的服务端
-export LocalIp='172.16.46.53'
+export LocalIp='10.0.2.147'
 
 ## httpd server address
-export HTTPD_SERVER='http://172.16.46.53/cloudera-parcels'
+export HTTPD_SERVER='http://10.0.2.147/cloudera-parcels'
 
 ## MySQL
-export MYSQL_HOST='172.16.46.53'
-export MYSQL_ROOT_PASSWD='@GennLife2015'
+export MYSQL_HOST='10.0.2.147'
+export MYSQL_ROOT_PASSWD='@Passwd2015'
 
 ## DataNode默认数据根目录
 export DATA_ROOT='/data'

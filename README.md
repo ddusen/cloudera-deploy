@@ -13,10 +13,10 @@
 ## 前提
 
 1. 从公司云盘下载软件包 cloudera-parcels.6.3.1.20230420.tar.gz 到脚本执行机器中。
-- http://119.254.145.21:12225/owncloud/index.php/s/wR6tBJApQoCu8qH
+- http://127.0.0.1:80/owncloud/index.php/s/wR6tBJApQoCu8qH
 - 如果网盘链接失效，去网盘目录下找该包：03-大数据/01-CDH/cloudera-parcels.6.3.1.20230420.tar.gz
 ```bash
-wget -O /opt/cloudera-parcels.6.3.1.20230420.tar.gz http://119.254.145.21:12225/owncloud/index.php/s/wR6tBJApQoCu8qH/download
+wget -O /opt/cloudera-parcels.6.3.1.20230420.tar.gz http://127.0.0.1:80/owncloud/index.php/s/wR6tBJApQoCu8qH/download
 ```
 
 2. 把压缩包解压到 /var/www/html 目录下
